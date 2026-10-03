@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flor Proof · Registro de lote</title>
+<style>
+:root{--ink:#1f2a44;--muted:#5b6478;--paper:#f4f6f8;--card:#fff;--line:#d5dae3;--rose:#b4235a;
+--serif:"Iowan Old Style","Palatino Linotype",Georgia,serif;--sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+@media (prefers-color-scheme:dark){:root{--ink:#e8ecf6;--muted:#9aa4bc;--paper:#141a2b;--card:#1c2338;--line:#32405f;--rose:#ee6b9c}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.5}
+main{max-width:34rem;margin:0 auto;padding:1.5rem 1.1rem 3rem}
+h1{font-family:var(--serif);font-size:2.1rem;margin:.2rem 0 .1rem}h1 span{color:var(--rose)}
+.lead{color:var(--muted);margin:0 0 1.2rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:.8rem;padding:1.2rem}
+label{display:block;margin-top:.9rem;font-weight:600}
+input,select{width:100%;margin-top:.25rem;padding:.7rem .8rem;border:1px solid var(--line);border-radius:.5rem;background:var(--paper);color:var(--ink);font:inherit}
+.row{display:flex;gap:.7rem}.row>div{flex:1;min-width:0}
+button{width:100%;margin-top:1.2rem;padding:.85rem 1rem;border:0;border-radius:.5rem;background:var(--ink);color:var(--paper);font:inherit;font-weight:700;cursor:pointer}
+button:disabled{opacity:.5;cursor:wait}
+input:focus-visible,select:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid var(--rose);outline-offset:2px}
+.note{color:var(--muted);font-size:.9rem;margin:.5rem 0 0}
+.msg{margin:1rem 0 0;color:var(--muted)}.msg.err{color:var(--rose)}
+#qr svg{width:11rem;height:11rem;display:block;margin:.8rem auto}
+a{color:var(--rose)}
+</style>
+</head>
+<body>
+<main>
+<h1>Flor <span>Proof</span></h1>
+<p class="lead">Registro de lotes de flores de Jujuy en Monad. No hace falta wallet: el registro se firma desde el servidor.</p>
+
+<form id="f" class="card" autocomplete="off">
+  <label for="codigo">Código de acceso</label>
+  <input id="codigo" type="password" required autocomplete="off">
+  <label for="idLote">Código del lote</label>
+  <input id="idLote" required>
+  <label for="variedad">Variedad de flor</label>
+  <select id="variedad"><option>Gladiolos</option><option>Rosas</option><option>Claveles</option><option>Lilium</option><option>Gerberas</option></select>
+  <label for="zona">Finca o zona</label>
+  <select id="zona"><option>Ramal - Yuto</option><option>Quebrada - Maimara</option><option>Quebrada - Tilcara</option><option>Valles - Perico</option></select>
+  <div class="row">
+    <div><label for="fecha">Día de cosecha</label><input id="fecha" type="date" required></div>
+    <div><label for="paquetes">Paquetes</label><input id="paquetes" type="number" min="1" inputmode="numeric" placeholder="20" required></div>
+  </div>
+  <div class="row">
+    <div><label for="vida">Vida útil</label><select id="vida"><option value="5">5 días</option><option value="7" selected>7 días</option><option value="10">10 días</option></select></div>
+    <div><label for="temporada">Temporada</label><input id="temporada" placeholder="Oct - Dic"></div>
+  </div>
+  <p class="note">El precio y el nombre del productor no se publican: lo que va a la cadena es público y no se puede borrar.</p>
+  <button id="btn" type="submit">Registrar en Monad y generar QR</button>
+  <p class="msg" id="estado" aria-live="polite"></p>
+  <div id="qr"></div>
+</form>
+<p class="note"><a href="consulta.html">Consultar un lote</a></p>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
+<script>
+// Pegá acá la URL de tu backend en Vercel (sin barra final).
+const API_URL = "https://TU-PROYECTO.vercel.app";
+const EXPLORADOR = "https://testnet.monadvision.com";
+const $ = id => document.getElementById(id);
+
+const hoy = new Date().toISOString().slice(0,10);
+$("fecha").value = hoy;
+$("idLote").value = "FP-" + hoy.replaceAll("-","") + "-" + String(Math.floor(Math.random()*900)+100);
+
+$("f").addEventListener("submit", async ev => {
+  ev.preventDefault();
+  const estado = $("estado"), btn = $("btn");
+  estado.className = "msg"; estado.textContent = "Registrando en Monad…"; $("qr").replaceChildren(); btn.disabled = true;
+  try{
+    const r = await fetch(API_URL + "/api/registrar", {
+      method: "POST", headers: {"Content-Type":"application/json"},
+      body: JSON.stringify({
+        codigoAcceso: $("codigo").value, idLote: $("idLote").value.trim(), variedad: $("variedad").value,
+        zona: $("zona").value, fecha: $("fecha").value, paquetes: $("paquetes").value,
+        vidaUtilDias: $("vida").value, temporada: $("temporada").value
+      })
+    });
+    const d = await r.json();
+    if(!r.ok) throw new Error(d.error || "No se pudo registrar.");
+
+    const a = document.createElement("a"); a.textContent = "Ver transacción"; a.href = EXPLORADOR + "/tx/" + d.tx; a.target = "_blank"; a.rel = "noopener";
+    estado.replaceChildren("Lote " + d.idLote + " registrado. ", a);
+    const url = new URL("consulta.html?lote=" + encodeURIComponent(d.idLote), location.href).href;
+    const qr = qrcode(0, "M"); qr.addData(url); qr.make();
+    $("qr").innerHTML = qr.createSvgTag({scalable:true});
+  }catch(e){
+    estado.className = "msg err";
+    estado.textContent = e instanceof TypeError ? "No se pudo conectar con el servidor. Probá de nuevo." : e.message;
+  }
+  btn.disabled = false;
+});
+</script>
+</body>
+</html>
