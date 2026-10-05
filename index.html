@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flor Proof · Registro de lote</title>
+<style>
+:root{--ink:#1f2a44;--muted:#5b6478;--paper:#f4f6f8;--card:#fff;--line:#d5dae3;--rose:#b4235a}
+@media (prefers-color-scheme:dark){:root{--ink:#e8ecf6;--muted:#9aa4bc;--paper:#141a2b;--card:#1c2338;--line:#32405f;--rose:#ee6b9c}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.5}
+main{max-width:34rem;margin:0 auto;padding:1.5rem 1.1rem 3rem}
+h1{font-size:1.8rem;margin:.2rem 0 .3rem}h1 span{color:var(--rose)}
+.lead{color:var(--muted);margin:0 0 1.2rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:.8rem;padding:1.2rem}
+label{display:block;margin-top:.9rem;font-weight:600}
+input,select{width:100%;margin-top:.25rem;padding:.7rem .8rem;border:1px solid var(--line);border-radius:.5rem;background:var(--paper);color:var(--ink);font:inherit}
+.row{display:flex;gap:.7rem}.row>div{flex:1;min-width:0}
+button{width:100%;margin-top:1.2rem;padding:.85rem 1rem;border:0;border-radius:.5rem;background:var(--ink);color:var(--paper);font:inherit;font-weight:600;cursor:pointer}
+button.sec{background:transparent;color:var(--ink);border:1px solid var(--line)}
+button:disabled{opacity:.5;cursor:wait}
+:focus-visible{outline:3px solid var(--rose);outline-offset:2px}
+.msg{margin:1rem 0 0;color:var(--muted)}.msg.err{color:var(--rose);font-weight:600}
+.hide{display:none}
+#qrbox{text-align:center;padding:1rem}
+#qrbox svg{width:15rem;height:15rem;display:block;margin:0 auto}
+#qrbox .cod{font-family:monospace;font-size:1.2rem;margin-top:.6rem;word-break:break-all}
+@media print{body{background:#fff}main>*:not(#vista-qr),#vista-qr>*:not(#qrbox){display:none!important}#qrbox{border:0}}
+</style>
+</head>
+<body>
+<main>
+<section id="vista-form">
+  <h1>Flor <span>Proof</span></h1>
+  <p class="lead">Registro de lote. Sin wallet: solo tu código de acceso.</p>
+  <div class="card">
+    <label for="codigo">Código de acceso</label>
+    <input id="codigo" type="password" autocomplete="off">
+    <label for="idLote">Código del lote</label>
+    <input id="idLote" placeholder="Ej.: LOTE-001" autocomplete="off">
+    <div class="row">
+      <div><label for="variedad">Variedad</label><select id="variedad"></select></div>
+      <div><label for="zona">Zona</label><select id="zona"></select></div>
+    </div>
+    <label for="temporada">Temporada</label>
+    <input id="temporada" placeholder="Ej.: Primavera 2026">
+    <div class="row">
+      <div><label for="paquetes">Paquetes</label><input id="paquetes" type="number" min="1" inputmode="numeric"></div>
+      <div><label for="vidaUtilDias">Vida útil (días)</label><input id="vidaUtilDias" type="number" min="1" max="365" inputmode="numeric"></div>
+    </div>
+    <label for="fechaCosecha">Fecha de cosecha</label>
+    <input id="fechaCosecha" type="date">
+    <button id="enviar" type="button">Registrar lote</button>
+    <p id="msg" class="msg" role="status" aria-live="polite"></p>
+  </div>
+</section>
+
+<section id="vista-qr" class="hide">
+  <h1>Lote <span>registrado</span></h1>
+  <div id="qrbox" class="card"><div id="qr"></div><div class="cod" id="cod"></div></div>
+  <button type="button" id="imprimir">Imprimir / guardar como PDF</button>
+  <button type="button" class="sec" id="otro">Registrar otro lote</button>
+</section>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script>
+var API_URL = "https://flor-proof-backend.vercel.app";
+var CONSULTA_URL = "https://webalphadigital.github.io/Flor-Proof/consulta.html";
+var VARIEDADES = ["Gladiolos","Rosas","Claveles","Lilium","Gerberas"];
+var ZONAS = ["Ramal - Yuto","Quebrada - Maimara","Quebrada - Tilcara","Valles - Perico"];
+var $ = function(id){ return document.getElementById(id); };
+
+function llenar(id, lista){ $(id).innerHTML = lista.map(function(x){ return '<option>'+x+'</option>'; }).join(""); }
+llenar("variedad", VARIEDADES); llenar("zona", ZONAS);
+
+function msg(t, esError){ var m=$("msg"); m.textContent=t; m.className="msg"+(esError?" err":""); }
+
+function mostrarQR(idLote){
+  var url = CONSULTA_URL + "?lote=" + encodeURIComponent(idLote);
+  try {
+    var qr = qrcode(0, "M"); qr.addData(url); qr.make();
+    $("qr").innerHTML = qr.createSvgTag(6, 2);
+  } catch(e) { $("qr").textContent = "No se pudo dibujar el QR. Enlace: " + url; }
+  $("cod").textContent = idLote;
+  $("vista-form").classList.add("hide");
+  $("vista-qr").classList.remove("hide");
+  window.scrollTo(0,0);
+}
+
+$("enviar").onclick = function(){
+  var datos = {};
+  ["codigo","idLote","variedad","zona","temporada","paquetes","vidaUtilDias","fechaCosecha"].forEach(function(k){ datos[k] = $(k).value.trim(); });
+  for (var k in datos) if (!datos[k]) { msg("Completa todos los campos (falta: " + k + ").", true); return; }
+
+  var btn = $("enviar"), ctrl = new AbortController(), t = setTimeout(function(){ ctrl.abort(); }, 45000);
+  btn.disabled = true; msg("Registrando… puede tardar unos segundos.");
+
+  fetch(API_URL + "/api/registrar", {
+    method: "POST", headers: {"Content-Type":"application/json"},
+    body: JSON.stringify(datos), signal: ctrl.signal
+  })
+  .then(function(r){ return r.json().catch(function(){ return {error:"Respuesta inesperada del servidor (código "+r.status+")."}; }); })
+  .then(function(j){
+    if (j.ok) { msg(""); mostrarQR(j.idLote || datos.idLote); }
+    else msg(j.error || "No se pudo registrar el lote.", true);
+  })
+  .catch(function(e){
+    msg(e.name === "AbortError" ? "El servidor tardó demasiado. Intenta de nuevo." :
+        "No se pudo conectar con el servidor (" + e.message + ").", true);
+  })
+  .finally(function(){ clearTimeout(t); btn.disabled = false; });
+};
+
+$("imprimir").onclick = function(){ window.print(); };
+$("otro").onclick = function(){
+  ["idLote","paquetes","vidaUtilDias","fechaCosecha"].forEach(function(k){ $(k).value=""; });
+  msg(""); $("vista-qr").classList.add("hide"); $("vista-form").classList.remove("hide");
+};
+</script>
+</body>
+</html>
