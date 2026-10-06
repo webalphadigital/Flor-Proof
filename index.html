@@ -96,7 +96,7 @@ $("enviar").onclick = function(){
   var btn = $("enviar"), ctrl = new AbortController(), t = setTimeout(function(){ ctrl.abort(); }, 45000);
   btn.disabled = true; msg("Registrando… puede tardar unos segundos.");
 
-  fetch(API_URL + "/api/registrar", {
+  fetch(API_URL + "https://flor-proof-backend.vercel.app/api/registrar", {
     method: "POST", headers: {"Content-Type":"application/json"},
     body: JSON.stringify(datos), signal: ctrl.signal
   })
