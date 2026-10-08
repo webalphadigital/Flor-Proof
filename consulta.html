@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flor Proof · Verified flowers</title>
+<style>
+:root{--ink:#1f2a44;--muted:#5b6478;--paper:#f4f6f8;--card:#fff;--line:#d5dae3;--ok:#1e7f5c;--okbg:#e2f3ec;--warn:#a96a10;--warnbg:#fbeed6;--bad:#a3262a;--badbg:#f8e1e1;--rose:#b4235a;
+--serif:"Iowan Old Style","Palatino Linotype",Georgia,serif;--sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+@media (prefers-color-scheme:dark){:root{--ink:#e8ecf6;--muted:#9aa4bc;--paper:#141a2b;--card:#1c2338;--line:#32405f;--ok:#4cc79a;--okbg:#17352d;--warn:#e0a24a;--warnbg:#3a2d14;--bad:#f08a8d;--badbg:#3b1f22;--rose:#ee6b9c}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.5}
+main{max-width:30rem;margin:0 auto;padding:1.3rem 1rem 3rem}
+h1{font-family:var(--serif);font-size:1.7rem;margin:.1rem 0 1rem}h1 span{color:var(--rose)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:.8rem;padding:1.1rem}
+.head{display:flex;align-items:center;gap:1rem;margin-bottom:1rem}
+.seal{flex:none;width:5.4rem;height:5.4rem;border-radius:50%;border:4px double var(--ok);color:var(--ok);display:grid;place-items:center;text-align:center;font-family:var(--serif);font-weight:700;font-size:.9rem;line-height:1.15;transform:rotate(-8deg);animation:stamp .35s ease-out}
+.seal.pend{border-color:var(--warn);color:var(--warn)}
+@keyframes stamp{from{transform:rotate(-8deg) scale(1.5);opacity:0}to{transform:rotate(-8deg) scale(1);opacity:1}}
+@media (prefers-reduced-motion:reduce){.seal{animation:none}}
+.big{font-family:var(--serif);font-size:1.35rem;margin:0}.sub{margin:.1rem 0 0;color:var(--muted)}
+.item{padding:.65rem 0;border-top:1px solid var(--line)}
+.item small{display:block;color:var(--muted)}.item b{font-size:1.05rem;font-weight:600;overflow-wrap:anywhere}
+.chip{margin-top:.9rem;padding:.8rem;border-radius:.6rem;font-weight:700;text-align:center}
+.chip small{display:block;font-weight:400;margin-top:.15rem}
+.chip.ok{background:var(--okbg);color:var(--ok)}.chip.warn{background:var(--warnbg);color:var(--warn)}.chip.bad{background:var(--badbg);color:var(--bad)}
+form{display:flex;gap:.5rem;margin-bottom:1rem}
+input{flex:1;min-width:0;padding:.7rem .8rem;border:1px solid var(--line);border-radius:.5rem;background:var(--card);color:var(--ink);font:inherit}
+button{padding:.7rem 1rem;border:0;border-radius:.5rem;background:var(--ink);color:var(--paper);font:inherit;font-weight:700}
+input:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid var(--rose);outline-offset:2px}
+.msg{margin:0;color:var(--muted)}.msg.err{color:var(--rose)}
+a{color:var(--rose)}footer{margin-top:1rem;font-size:.9rem;color:var(--muted)}
+.lang{display:flex;justify-content:flex-end;gap:.4rem;padding-top:1rem}.lang button{width:auto;margin:0;padding:.25rem .65rem;border:1px solid var(--line);border-radius:.4rem;background:transparent;color:var(--muted);font:inherit;font-size:.85rem;font-weight:700}.lang button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}.lang button:focus-visible{outline:3px solid var(--rose);outline-offset:2px}
+</style>
+</head>
+<body>
+<main>
+<div class="lang" role="group" aria-label="Language"><button type="button" data-l="en" aria-pressed="true">EN</button><button type="button" data-l="es" aria-pressed="false">ES</button></div>
+<h1>Flor <span>Proof</span></h1>
+<form id="f"><input id="q" aria-label="Code"><button id="bt">Search</button></form>
+<section class="card" id="out" aria-live="polite"><p class="msg">Scan the QR on the package or type its code.</p></section>
+<footer id="foot"></footer>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
+<script>
+// Paste the address of the deployed FlorProof contract here.
+const CONTRATO = "0xPASTE_CONTRACT_ADDRESS_HERE";
+const RPC = "https://testnet-rpc.monad.xyz", EXPLORADOR = "https://testnet.monadvision.com";
+const TUP = "(string idLote,string variedad,string zona,string temporada,uint32 paquetes,uint64 fechaCosecha,uint16 vidaUtilDias)";
+const ABI = [
+ "function consultarLote(string) view returns ((bytes32 datosHash," + TUP + " datos,address productor,uint64 declaradoEn,address floreria,uint64 confirmadoEn,uint32 disponibles,uint64 stockActualizadoEn))",
+ "function consultarRamo(string) view returns ((string idLote,address floreria,uint64 creadoEn))"
+];
+let L = "en";
+try { L = localStorage.getItem("fp-lang") || ((navigator.language || "").toLowerCase().startsWith("es") ? "es" : "en"); } catch (e) {}
+const T = (en, es) => (L === "es" ? es : en);
+let ultima = null;
+function applyLang() {
+  document.documentElement.lang = L;
+  document.title = T("Flor Proof · Verified flowers", "Flor Proof · Flor verificada");
+  $("q").placeholder = T("Batch or bouquet code", "Código de lote o de ramo");
+  $("q").setAttribute("aria-label", T("Code", "Código"));
+  $("bt").textContent = T("Search", "Consultar");
+  document.querySelectorAll(".lang button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.l === L)));
+  pie();
+  if (ultima) consultar(ultima[0], ultima[1]);
+  else $("out").replaceChildren(el("p", T("Scan the QR on the package or type its code.", "Escaneá el QR del paquete o escribí su código."), "msg"));
+}
+document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click", () => { L = b.dataset.l; try { localStorage.setItem("fp-lang", L); } catch (e) {} applyLang(); }));
+const params = new URLSearchParams(location.search);
+const direccion = params.get("c") || CONTRATO;
+const $ = id => document.getElementById(id);
+const el = (t,x,c) => { const n = document.createElement(t); if(x!==undefined) n.textContent = x; if(c) n.className = c; return n; };
+const corta = a => a.slice(0,6) + "…" + a.slice(-4);
+const dia = t => new Date(Number(t)*1000).toLocaleDateString((L === "es" ? "es-AR" : "en-US"),{day:"numeric",month:"long",year:"numeric",timeZone:"UTC"});
+const hora = t => new Date(Number(t)*1000).toLocaleString((L === "es" ? "es-AR" : "en-US"),{day:"numeric",month:"numeric",hour:"2-digit",minute:"2-digit"});
+function item(label, valor){ const d = el("div",undefined,"item"); d.append(el("small",label)); const b = el("b"); valor instanceof Node ? b.append(valor) : b.textContent = valor; d.append(b); return d; }
+function dirLink(a){ const l = el("a",corta(a)); l.href = EXPLORADOR + "/address/" + a; l.target = "_blank"; l.rel = "noopener"; return l; }
+function chip(clase, titulo, detalle){ const c = el("div",titulo,"chip " + clase); if(detalle) c.append(el("small",detalle)); return c; }
+
+async function consultar(codigo, esRamo){
+  const out = $("out"); codigo = codigo.trim(); ultima = [codigo, esRamo];
+  if(!codigo){ out.replaceChildren(el("p",T("Enter a code.", "Escribí un código."),"msg err")); return; }
+  if(!ethers.isAddress(direccion)){ out.replaceChildren(el("p",T("The contract address is not set.", "Falta configurar la dirección del contrato."),"msg err")); return; }
+  out.replaceChildren(el("p",T("Looking it up…", "Consultando…"),"msg"));
+  try{
+    const c = new ethers.Contract(direccion, ABI, new ethers.JsonRpcProvider(RPC));
+    let idLote = codigo, ramo = null;
+    if(esRamo){ ramo = await c.consultarRamo(codigo); idLote = ramo.idLote; }
+    const l = await c.consultarLote(idLote), d = l.datos;
+    const ok = l.confirmadoEn !== 0n;
+
+    const head = el("div",undefined,"head"), t = el("div");
+    t.append(el("p", esRamo ? T("Bouquet ", "Ramo ") + codigo : d.variedad,"big"),
+             el("p", ok ? T("Receipt confirmed by the florist", "Recepción confirmada por la florería") : T("Declared by the grower, awaiting confirmation", "Declarado por el productor, falta confirmación"),"sub"));
+    head.append(el("div", ok ? T("Origin recorded", "Origen registrado") : T("Pending confirmation", "Pendiente de confirmación"),"seal" + (ok ? "" : " pend")), t);
+
+    const vence = Number(d.fechaCosecha) + Number(d.vidaUtilDias) * 86400;
+    const diasRest = Math.ceil((vence - Date.now()/1000) / 86400);
+    const cosecha = el("span"); cosecha.append(T("Harvested on ", "Cosechado el ") + dia(d.fechaCosecha), el("br"), T("Expires on ", "Vence el ") + dia(vence) + " (" + d.vidaUtilDias + T(" days of shelf life)", " días de vida)"));
+
+    const frag = [head,
+      item(T("Variety", "Variedad"), d.variedad), item(T("Origin", "Origen"), d.zona), item(T("Season", "Temporada"), d.temporada || "—"),
+      item(T("Harvest and expiry", "Cosecha y vencimiento"), cosecha),
+      item(T("Grower", "Productor"), dirLink(l.productor))];
+    if(ok) frag.push(item(T("Florist", "Florería"), dirLink(l.floreria)));
+    if(ramo) frag.push(item(T("Bouquet made on", "Ramo armado el"), dia(ramo.creadoEn)));
+    frag.push(item(T("Batch fingerprint", "Huella del lote"), l.datosHash));
+
+    frag.push(diasRest > 0 ? chip(diasRest <= 2 ? "warn" : "ok", diasRest <= 2 ? T("Expires soon", "Vence pronto") : T("Fresh flowers", "Flor fresca"), T(diasRest + " days of shelf life left", "Quedan " + diasRest + " días de vida útil"))
+                          : chip("bad", T("Expired", "Vencida"), T("Past its estimated shelf life", "Pasó su vida útil estimada")));
+    frag.push(l.disponibles > 0 ? chip("ok", T("In stock: " + l.disponibles + " of " + d.paquetes + " packages", "Hay stock: " + l.disponibles + " de " + d.paquetes + " paquetes"), T("Updated on ", "Actualizado el ") + hora(l.stockActualizadoEn))
+                               : chip("bad", T("Out of stock", "Sin stock"), T("All " + d.paquetes + " packages were sold. Updated on ", "Se vendieron los " + d.paquetes + " paquetes. Actualizado el ") + hora(l.stockActualizadoEn)));
+    out.replaceChildren(...frag);
+  }catch(e){
+    out.replaceChildren(el("p", e && e.code === "ACTION_REJECTED" ? T("Operation cancelled.", "Operación cancelada.") : T("We couldn't find that record. Check the code or try again in a few minutes.", "No encontramos ese registro. Revisá el código o probá de nuevo en unos minutos."),"msg err"));
+  }
+}
+
+$("f").addEventListener("submit", ev => { ev.preventDefault(); const v = $("q").value; consultar(v, v.toUpperCase().startsWith("RAMO")); });
+applyLang();
+const lote = params.get("lote"), ramo = params.get("ramo");
+if(lote){ $("q").value = lote; consultar(lote,false); }
+if(ramo){ $("q").value = ramo; consultar(ramo,true); }
+function pie(){ $("foot").replaceChildren(); if(ethers.isAddress(direccion)){ const a = el("a",T("View contract in the explorer","Ver contrato en el explorador")); a.href = EXPLORADOR + "/address/" + direccion; a.target = "_blank"; a.rel = "noopener"; $("foot").append(a); } }
+</script>
+</body>
+</html>
