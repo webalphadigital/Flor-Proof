@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flor Proof · QR code</title>
+<style>
+:root{--ink:#1f2a44;--muted:#5b6478;--paper:#f4f6f8;--card:#fff;--line:#d5dae3;--bad:#a3262a;--rose:#b4235a;
+--serif:"Iowan Old Style","Palatino Linotype",Georgia,serif;--sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+@media (prefers-color-scheme:dark){:root{--ink:#e8ecf6;--muted:#9aa4bc;--paper:#141a2b;--card:#1c2338;--line:#32405f;--bad:#f08a8d;--rose:#ee6b9c}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.5}
+main{max-width:26rem;margin:0 auto;padding:1.3rem 1rem 3rem;text-align:center}
+h1{font-family:var(--serif);font-size:1.7rem;margin:.1rem 0 1rem}h1 span{color:var(--rose)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:.8rem;padding:1.4rem 1rem}
+#qr{display:grid;place-items:center}#qr img,#qr canvas{width:240px;height:240px;background:#fff;padding:10px;border-radius:.4rem}
+.cod{margin:.9rem 0 .2rem;font-family:ui-monospace,Consolas,monospace;font-size:1.2rem;font-weight:700}
+.sub{margin:0;color:var(--muted)}
+button{width:100%;margin-top:1rem;padding:.8rem 1rem;border:0;border-radius:.5rem;background:var(--ink);color:var(--paper);font:inherit;font-weight:700}
+button:focus-visible{outline:3px solid var(--rose);outline-offset:2px}
+.err{color:var(--bad)}
+@media print{body{background:#fff;color:#000}h1,button{display:none}.card{border:0}.sub{color:#000}}
+.lang{display:flex;justify-content:flex-end;gap:.4rem;padding-top:1rem}.lang button{width:auto;margin:0;padding:.25rem .65rem;border:1px solid var(--line);border-radius:.4rem;background:transparent;color:var(--muted);font:inherit;font-size:.85rem;font-weight:700}.lang button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}.lang button:focus-visible{outline:3px solid var(--rose);outline-offset:2px}
+</style>
+</head>
+<body>
+<main>
+<div class="lang" role="group" aria-label="Language"><button type="button" data-l="en" aria-pressed="true">EN</button><button type="button" data-l="es" aria-pressed="false">ES</button></div>
+<h1>Flor <span>Proof</span></h1>
+<section class="card" id="tarjeta">
+  <div id="qr"></div>
+  <p class="cod" id="cod"></p>
+  <p class="sub" id="leyenda"></p>
+</section>
+<button id="imp" type="button">Save as image</button>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+// Uso: qr.html?ramo=RAMO-001  o  qr.html?lote=LOTE-011
+const $ = id => document.getElementById(id);
+const p = new URLSearchParams(location.search);
+const ramo = p.get("ramo"), lote = p.get("lote"), codigo = ramo || lote;
+if (!codigo) {
+  $("leyenda").className = "sub err";
+  $("imp").hidden = true;
+} else {
+  const destino = new URL("consulta.html?" + (ramo ? "ramo=" : "lote=") + encodeURIComponent(codigo), location.href).href;
+  new QRCode($("qr"), { text: destino, width: 480, height: 480 });
+  $("cod").textContent = codigo;
+}
+$("imp").addEventListener("click", () => {
+  const origen = $("qr").querySelector("canvas");
+  if (!origen) return;
+  const margen = 30, pie = 80, w = origen.width + margen * 2, h = origen.height + margen + pie;
+  const c = document.createElement("canvas"); c.width = w; c.height = h;
+  const x = c.getContext("2d");
+  x.fillStyle = "#fff"; x.fillRect(0, 0, w, h);
+  x.drawImage(origen, margen, margen);
+  x.fillStyle = "#000"; x.textAlign = "center";
+  x.font = "bold 34px monospace"; x.fillText(codigo, w / 2, origen.height + margen + 42);
+  x.font = "22px sans-serif"; x.fillText("Flor Proof", w / 2, origen.height + margen + 72);
+  const a = document.createElement("a");
+  a.download = codigo + ".png"; a.href = c.toDataURL("image/png"); a.click();
+});
+let L = "en";
+try { L = localStorage.getItem("fp-lang") || ((navigator.language || "").toLowerCase().startsWith("es") ? "es" : "en"); } catch (e) {}
+const T = (en, es) => (L === "es" ? es : en);
+function applyLang() {
+  document.documentElement.lang = L;
+  document.title = T("Flor Proof · QR code", "Flor Proof · Código QR");
+  $("imp").textContent = T("Save as image", "Guardar como imagen");
+  $("leyenda").textContent = !codigo
+    ? T("Missing code. Go back and open the QR from there.", "Falta el código. Volvé a la pantalla anterior y abrí el QR desde ahí.")
+    : ramo ? T("Scan to see this bouquet's journey", "Escaneá para ver el recorrido de este ramo")
+           : T("Scan to see this batch's origin", "Escaneá para ver el origen de este lote");
+  document.querySelectorAll(".lang button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.l === L)));
+}
+document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click", () => { L = b.dataset.l; try { localStorage.setItem("fp-lang", L); } catch (e) {} applyLang(); }));
+applyLang();
+</script>
+</body>
+</html>
