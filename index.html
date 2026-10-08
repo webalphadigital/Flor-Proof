@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flor Proof · Every bouquet with its story</title>
+<meta name="description" content="Flor Proof: growers register their harvest, customers scan a QR code and learn where their flowers come from.">
+<style>
+:root{--ink:#1f2a44;--muted:#5b6478;--paper:#f4f6f8;--card:#fff;--line:#d5dae3;--rose:#b4235a;--green:#1e7f5c;
+--serif:"Iowan Old Style","Palatino Linotype",Georgia,serif;--sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+@media (prefers-color-scheme:dark){:root{--ink:#e8ecf6;--muted:#9aa4bc;--paper:#141a2b;--card:#1c2338;--line:#32405f;--rose:#ee6b9c;--green:#4cc79a}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.6}
+main{max-width:40rem;margin:0 auto;padding:0 1rem 3rem}
+section{padding:2rem 0 .5rem}
+h1,h2,h3{font-family:var(--serif);line-height:1.2;margin:0}
+h1{font-size:clamp(2rem,8vw,2.9rem);margin-bottom:.8rem}
+h1 span{color:var(--rose)}
+h2{font-size:1.6rem;margin-bottom:.8rem}
+h3{font-size:1.1rem;margin-bottom:.3rem}
+p{margin:0 0 .8rem}
+.lead{font-size:1.15rem;color:var(--muted);max-width:34rem}
+.hero{padding:3rem 0 1.5rem}
+.cta{display:inline-block;margin-top:.6rem;padding:.8rem 1.3rem;border-radius:.5rem;background:var(--ink);color:var(--paper);font-weight:700;text-decoration:none}
+.card{background:var(--card);border:1px solid var(--line);border-radius:.8rem;padding:1.1rem;margin-bottom:.8rem}
+.card p:last-child{margin-bottom:0}
+.problema li{margin-bottom:.6rem}
+ul{padding-left:1.2rem;margin:0}
+.pasos{list-style:none;padding:0;margin:0;counter-reset:p}
+.pasos li{counter-increment:p;display:flex;gap:.9rem;margin-bottom:.8rem}
+.pasos li::before{content:counter(p);flex:none;width:2rem;height:2rem;border-radius:50%;background:var(--rose);color:#fff;font-weight:700;display:grid;place-items:center}
+.pasos strong{display:block}
+.pasos span{color:var(--muted)}
+.accesos a.card{display:block;color:inherit;text-decoration:none}
+.accesos a.card:hover{border-color:var(--rose)}
+.accesos span{color:var(--rose);font-weight:700}
+a:focus-visible,.cta:focus-visible{outline:3px solid var(--rose);outline-offset:3px}
+footer{margin-top:2rem;padding-top:1rem;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+.lang{display:flex;justify-content:flex-end;gap:.4rem;padding-top:1rem}.lang button{width:auto;margin:0;padding:.25rem .65rem;border:1px solid var(--line);border-radius:.4rem;background:transparent;color:var(--muted);font:inherit;font-size:.85rem;font-weight:700}.lang button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}.lang button:focus-visible{outline:3px solid var(--rose);outline-offset:2px}
+</style>
+</head>
+<body>
+<main>
+<div class="lang" role="group" aria-label="Language"><button type="button" data-l="en" aria-pressed="true">EN</button><button type="button" data-l="es" aria-pressed="false">ES</button></div>
+
+<header class="hero">
+  <h1>Every bouquet with <span>its story</span></h1>
+  <p class="lead">Flor Proof is a platform where growers register their harvest and get a QR code. Customers scan it and know where their flowers come from.</p>
+  <a class="cta" href="#accesos">Go to the forms</a>
+</header>
+
+<section id="problema">
+  <h2>The problem</h2>
+  <div class="card problema">
+    <ul>
+      <li>Small and medium flower growers keep track of their harvests without a reliable method.</li>
+      <li>Whoever buys the bouquet doesn't know who grew it or where it came from.</li>
+      <li>Without a brand, growers can't build a reputation or keep customers coming back.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="solucion">
+  <h2>The solution</h2>
+  <p>Growers register each batch and get a QR code. It goes on the bouquet, and the customer scans it with their phone.</p>
+  <ol class="pasos">
+    <li><div><strong>The grower declares a batch</strong><span>Variety, zone, season, quantity, harvest date and shelf life.</span></div></li>
+    <li><div><strong>The florist confirms receipt</strong><span>Records that the batch arrived and makes the bouquets.</span></div></li>
+    <li><div><strong>The customer scans the QR</strong><span>Sees who grew it, where it comes from, which variety it is and how long it lasts.</span></div></li>
+  </ol>
+</section>
+
+<section id="beneficios">
+  <h2>Benefits</h2>
+  <div class="card">
+    <h3>For the grower</h3>
+    <p>Keep an organized record of every harvest, build your own brand and earn the reputation that brings customers back.</p>
+  </div>
+  <div class="card">
+    <h3>For the florist</h3>
+    <p>Know where what you sell comes from and show it on every bouquet.</p>
+  </div>
+  <div class="card">
+    <h3>For the customer</h3>
+    <p>Know which flowers you are buying: where they were grown, who grew them, which variety they are and how long they last.</p>
+  </div>
+</section>
+
+<section id="accesos" class="accesos">
+  <h2>Try it</h2>
+  <a class="card" href="productora.html">
+    <h3>I'm a grower</h3>
+    <p>Register a batch and get its QR code.</p>
+    <span>Open the form →</span>
+  </a>
+  <a class="card" href="florista.html">
+    <h3>I'm a florist</h3>
+    <p>Confirm receipt of a batch and make a bouquet with its QR code.</p>
+    <span>Open the form →</span>
+  </a>
+  <a class="card" href="consulta.html">
+    <h3>I'm a customer</h3>
+    <p>Look up the origin of a batch or bouquet with its code.</p>
+    <span>Look up →</span>
+  </a>
+</section>
+
+<footer>Flor Proof · Test version</footer>
+</main>
+<script>
+let L = "en";
+try { L = localStorage.getItem("fp-lang") || ((navigator.language || "").toLowerCase().startsWith("es") ? "es" : "en"); } catch (e) {}
+const T = (en, es) => (L === "es" ? es : en);
+const ES = {"Every bouquet with <span>its story</span>": "Cada ramo con <span>su historia</span>", "Flor Proof is a platform where growers register their harvest and get a QR code. Customers scan it and know where their flowers come from.": "Flor Proof es una plataforma donde la productora registra su cosecha y genera un QR. El cliente lo escanea y sabe de dónde vienen sus flores.", "Go to the forms": "Ir a los formularios", "The problem": "El problema", "Small and medium flower growers keep track of their harvests without a reliable method.": "Los pequeños y medianos productores de flores llevan el registro de sus cosechas sin un método confiable.", "Whoever buys the bouquet doesn't know who grew it or where it came from.": "Quien compra el ramo no sabe quién lo produjo ni de dónde viene.", "Without a brand, growers can't build a reputation or keep customers coming back.": "Sin una marca, la productora no puede construir reputación ni fidelizar a sus clientes.", "The solution": "La solución", "Growers register each batch and get a QR code. It goes on the bouquet, and the customer scans it with their phone.": "La productora registra cada lote y recibe un QR. Se pega en el ramo, y el cliente lo escanea con su celular.", "The grower declares a batch": "La productora declara su lote", "Variety, zone, season, quantity, harvest date and shelf life.": "Variedad, zona, temporada, cantidad, fecha de cosecha y vida útil.", "The florist confirms receipt": "La florería confirma la recepción", "Records that the batch arrived and makes the bouquets.": "Deja constancia de que el lote llegó y arma sus ramos.", "The customer scans the QR": "El cliente escanea el QR", "Sees who grew it, where it comes from, which variety it is and how long it lasts.": "Ve quién lo produjo, de dónde viene, qué variedad es y cuánto le dura.", "Benefits": "Beneficios", "For the grower": "Para la productora", "Keep an organized record of every harvest, build your own brand and earn the reputation that brings customers back.": "Lleva un registro ordenado de sus cosechas, construye su propia marca y gana reputación para fidelizar más clientes.", "For the florist": "Para la florería", "Know where what you sell comes from and show it on every bouquet.": "Sabe de dónde viene lo que vende y puede mostrarlo en cada ramo.", "For the customer": "Para el cliente", "Know which flowers you are buying: where they were grown, who grew them, which variety they are and how long they last.": "Sabe qué flor está comprando: dónde se produjo, quién la produjo, qué variedad es y cuánto dura.", "Try it": "Probalo", "I'm a grower": "Soy productora", "Register a batch and get its QR code.": "Registrá un lote y obtené su QR.", "I'm a florist": "Soy florería", "Confirm receipt of a batch and make a bouquet with its QR code.": "Confirmá la recepción de un lote y armá un ramo con su QR.", "I'm a customer": "Soy cliente", "Look up the origin of a batch or bouquet with its code.": "Consultá el origen de un lote o de un ramo con su código.", "Open the form →": "Abrir el formulario →", "Look up →": "Consultar →", "Flor Proof · Test version": "Flor Proof · Versión de prueba"};
+function applyLang() {
+  document.documentElement.lang = L;
+  document.querySelectorAll("body *").forEach(n => {
+    if (n.tagName === "SCRIPT" || n.closest(".lang")) return;
+    const h1 = n.tagName === "H1";
+    if (n.children.length && !h1) return;
+    if (!n.dataset.en) { const k = h1 ? n.innerHTML : n.textContent.trim(); if (!(k in ES)) return; n.dataset.en = k; }
+    const v = L === "es" ? ES[n.dataset.en] : n.dataset.en;
+    if (h1) n.innerHTML = v; else n.textContent = v;
+  });
+  document.querySelectorAll(".lang button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.l === L)));
+  document.title = T("Flor Proof · Every bouquet with its story", "Flor Proof · Cada ramo con su historia");
+}
+document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click", () => { L = b.dataset.l; try { localStorage.setItem("fp-lang", L); } catch (e) {} applyLang(); }));
+applyLang();
+</script>
+</body>
+</html>
