@@ -99,18 +99,14 @@ function exito(j) {
   const out = $("out");
   const caja = el("div", j.accion === "ramo" ? T("Bouquet registered", "Ramo registrado") : T("Receipt confirmed", "Recepción confirmada"), "ok");
   caja.append(el("small", T("Batch ", "Lote ") + j.idLote + (j.idRamo ? " · " + T("Bouquet ", "Ramo ") + j.idRamo : "")));
-  const enlace = el("a", T("View the transaction in the explorer", "Ver la transacción en el explorador"));
-  enlace.href = EXPLORADOR + "/tx/" + j.hash; enlace.target = "_blank"; enlace.rel = "noopener";
-  out.replaceChildren(caja);
+ out.replaceChildren(caja);
   if (j.accion === "ramo") {
     const q = el("a", T("Open the bouquet QR", "Abrir el QR del ramo"), "boton");
     q.href = "qr.html?ramo=" + encodeURIComponent(j.idRamo); q.target = "_blank"; q.rel = "noopener";
     out.append(q);
   }
-  const pie = el("p", undefined, "msg"); pie.append(enlace); out.append(pie);
-}
-
-$("f").addEventListener("submit", async ev => {
+ 
+  $("f").addEventListener("submit", async ev => {
   ev.preventDefault();
   const btn = $("btn"); btn.disabled = true;
   mensaje(T("Signing… this may take a few seconds.", "Firmando… puede tardar unos segundos."));
