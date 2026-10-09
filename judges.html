@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flor Proof · For the judges</title>
+<style>
+:root{--ink:#1f2a44;--muted:#5b6478;--paper:#f4f6f8;--card:#fff;--line:#d5dae3;--rose:#b4235a;
+--serif:"Iowan Old Style","Palatino Linotype",Georgia,serif;--sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+@media (prefers-color-scheme:dark){:root{--ink:#e8ecf6;--muted:#9aa4bc;--paper:#141a2b;--card:#1c2338;--line:#32405f;--rose:#ee6b9c}}
+*{box-sizing:border-box}
+html[lang="en"] [lang="es"],html[lang="es"] [lang="en"]{display:none}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.6}
+main{max-width:42rem;margin:0 auto;padding:0 1rem 3rem}
+section{padding:1.8rem 0 .3rem}
+h1,h2,h3{font-family:var(--serif);line-height:1.2;margin:0}
+h1{font-size:clamp(2.2rem,9vw,3.2rem);margin-bottom:.6rem}h1 span{color:var(--rose)}
+h2{font-size:1.5rem;margin-bottom:.7rem}h3{font-size:1.05rem;margin:1rem 0 .3rem}
+p{margin:0 0 .8rem}ul,ol{margin:0 0 .8rem;padding-left:1.25rem}li{margin-bottom:.35rem}
+.hero{padding:2.2rem 0 1rem}.lead{font-size:1.15rem;color:var(--muted)}
+.cta{display:inline-block;margin:.4rem .5rem 0 0;padding:.75rem 1.2rem;border-radius:.5rem;background:var(--ink);color:var(--paper);font-weight:700;text-decoration:none}
+.cta.sec{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:.8rem;padding:1.1rem;margin-bottom:.8rem}
+code{font-family:ui-monospace,Consolas,monospace;font-size:.92em;background:var(--paper);border:1px solid var(--line);border-radius:.3rem;padding:.05rem .35rem;overflow-wrap:anywhere}
+details{background:var(--card);border:1px solid var(--line);border-radius:.8rem;padding:.2rem 1rem;margin-bottom:.6rem}
+summary{cursor:pointer;font-weight:700;padding:.7rem 0}
+a{color:var(--rose)}
+a:focus-visible,summary:focus-visible,.lang button:focus-visible{outline:3px solid var(--rose);outline-offset:3px}
+footer{margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+[hidden]{display:none!important}
+.lang{display:flex;justify-content:flex-end;gap:.4rem;padding-top:1rem}.lang button{padding:.25rem .65rem;border:1px solid var(--line);border-radius:.4rem;background:transparent;color:var(--muted);font:inherit;font-size:.85rem;font-weight:700}.lang button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+</style>
+</head>
+<body>
+<main>
+<div class="lang" role="group" aria-label="Language"><button type="button" data-l="en" aria-pressed="true">EN</button><button type="button" data-l="es" aria-pressed="false">ES</button></div>
+
+<header class="hero">
+  <h1>Flor <span>Proof</span></h1>
+  <p class="lead" lang="en">Every bouquet with its story. Growers register each harvest, and customers scan a QR code to see where their flowers come from.</p>
+  <p class="lead" lang="es">Cada ramo con su historia. Las productoras registran cada cosecha y los clientes escanean un QR para ver de dónde vienen sus flores.</p>
+  <a class="cta" href="index.html"><span lang="en">Open the live demo</span><span lang="es">Abrir la demo en vivo</span></a>
+  <a class="cta sec" data-link="video" hidden><span lang="en">Watch the video</span><span lang="es">Ver el video</span></a>
+</header>
+
+<section id="overview">
+  <div lang="en">
+    <h2>The idea</h2>
+    <p><strong>Problem.</strong> Small and medium flower growers keep track of their harvests without a reliable method. Whoever buys a bouquet doesn't know who grew it, and without a brand growers can't build a reputation or keep customers coming back.</p>
+    <p><strong>Solution.</strong> The grower registers a batch and gets a QR code. The florist confirms receipt and makes bouquets, each with its own QR. The customer scans it with their phone, with no app and no wallet, and sees who grew the flowers, where they come from, which variety they are and how long they last.</p>
+    <p><strong>Benefits.</strong> Growers keep an organized record, build a brand and earn trust. Florists show where what they sell comes from. Customers know which flowers they are buying.</p>
+  </div>
+  <div lang="es">
+    <h2>La idea</h2>
+    <p><strong>Problema.</strong> Los pequeños y medianos productores de flores llevan el registro de sus cosechas sin un método confiable. Quien compra un ramo no sabe quién lo cultivó, y sin una marca las productoras no pueden construir reputación ni lograr que sus clientes vuelvan.</p>
+    <p><strong>Solución.</strong> La productora registra un lote y recibe un QR. La florería confirma la recepción y arma ramos, cada uno con su propio QR. El cliente lo escanea con su celular, sin app ni wallet, y ve quién cultivó las flores, de dónde vienen, qué variedad son y cuánto duran.</p>
+    <p><strong>Beneficios.</strong> Las productoras llevan un registro ordenado, construyen una marca y ganan confianza. Las florerías muestran de dónde viene lo que venden. Los clientes saben qué flores compran.</p>
+  </div>
+</section>
+
+<section id="try">
+  <div lang="en">
+    <h2>Try it in 3 minutes</h2>
+    <p>Quick look, no code needed:</p>
+    <ul>
+      <li><a href="consulta.html?lote=DEMO-LOTE-02">Full journey of a batch</a> (grower → florist → bouquet)</li>
+      <li><a href="consulta.html?ramo=DEMO-RAMO-01">A bouquet</a></li>
+    </ul>
+  </div>
+  <div lang="es">
+    <h2>Probalo en 3 minutos</h2>
+    <p>Vista rápida, sin código:</p>
+    <ul>
+      <li><a href="consulta.html?lote=DEMO-LOTE-02">Recorrido completo de un lote</a> (productora → florería → ramo)</li>
+      <li><a href="consulta.html?ramo=DEMO-RAMO-01">Un ramo</a></li>
+    </ul>
+  </div>
+
+  <div class="card" id="codes" hidden>
+    <h3 lang="en">Access codes (testnet only)</h3><h3 lang="es">Códigos de acceso (solo testnet)</h3>
+    <ul>
+      <li data-need="codigoProductora"><span lang="en">Grower:</span><span lang="es">Productora:</span> <code data-text="codigoProductora"></code></li>
+      <li data-need="codigoFloreria"><span lang="en">Florist:</span><span lang="es">Florería:</span> <code data-text="codigoFloreria"></code></li>
+    </ul>
+  </div>
+
+  <div lang="en">
+    <h3>Full flow</h3>
+    <ol>
+      <li><strong>Grower:</strong> open <a href="productora.html">"I'm a grower"</a>, enter the grower code and register a batch with your own new code, for example <code>JUDGE-YOURNAME-01</code>. You get a QR page and a link to the transaction.</li>
+      <li>Open the QR: the status says "Pending confirmation".</li>
+      <li><strong>Florist:</strong> open <a href="florista.html">"I'm a florist"</a>, enter the florist code, choose "Confirm receipt of a batch" and use the same batch code.</li>
+      <li>Choose "Make a bouquet" with that batch code and a new bouquet code, for example <code>JUDGE-YOURNAME-R1</code>. Open the bouquet QR.</li>
+      <li>Scan or open it: you see the full journey from grower to bouquet.</li>
+    </ol>
+    <p>Batch and bouquet codes can be used only once (letters, numbers, dots, hyphens and underscores). A bouquet needs a confirmed batch. Transactions take a few seconds.</p>
+  </div>
+  <div lang="es">
+    <h3>Flujo completo</h3>
+    <ol>
+      <li><strong>Productora:</strong> abrí <a href="productora.html">"Soy productora"</a>, escribí el código de productora y registrá un lote con un código nuevo propio, por ejemplo <code>JUEZ-TUNOMBRE-01</code>. Recibís una página con el QR y un enlace a la transacción.</li>
+      <li>Abrí el QR: el estado dice "Pendiente de confirmación".</li>
+      <li><strong>Florería:</strong> abrí <a href="florista.html">"Soy florería"</a>, escribí el código de florería, elegí "Confirmar recepción de un lote" y usá el mismo código de lote.</li>
+      <li>Elegí "Armar un ramo" con ese código de lote y un código de ramo nuevo, por ejemplo <code>JUEZ-TUNOMBRE-R1</code>. Abrí el QR del ramo.</li>
+      <li>Escaneá o abrí ese QR: ves el recorrido completo, desde la productora hasta el ramo.</li>
+    </ol>
+    <p>Los códigos de lote y de ramo se usan una sola vez (letras, números, punto, guion y guion bajo). Un ramo necesita un lote confirmado. Las transacciones tardan unos segundos.</p>
+  </div>
+</section>
+
+<section id="tech">
+  <h2 lang="en">Technical overview</h2><h2 lang="es">Descripción técnica</h2>
+  <div lang="en">
+    <p>Static frontend (GitHub Pages) → serverless backend (Vercel) → smart contract (Monad Testnet). Customers read directly from the contract, with no backend and no wallet.</p>
+    <details><summary>Smart contract</summary>
+      <ul>
+        <li>Solidity ^0.8.24, one contract (<code>FlorProof</code>) on Monad Testnet: <code data-contract>see links below</code>.</li>
+        <li>An admin authorizes growers and florists; each role can only call its own functions.</li>
+        <li><code>declararLote</code>: a grower records a batch. The batch ID is the hash of its code, so codes are unique. A hash of the data plus the grower's address is stored.</li>
+        <li><code>confirmarRecepcion</code>: a florist confirms receipt. <code>registrarRamo</code>: links a bouquet to a batch, only for the florist who confirmed it.</li>
+        <li><code>registrarVenta</code>: the grower decrements stock, never below zero (not in the interface yet).</li>
+        <li><code>consultarLote</code> / <code>consultarRamo</code>: read-only. Declared data can't be edited later. Price and grower name aren't stored.</li>
+      </ul>
+    </details>
+    <details><summary>Backend</summary>
+      <ul>
+        <li>Node.js and ethers v6. Two functions: <code>registrar</code> (grower) and <code>florista</code> (florist).</li>
+        <li>Each access code maps to its own signing key, kept only in environment variables. The backend signs and pays gas, so users never touch a wallet.</li>
+        <li>Input validation, timing-safe code comparison, CORS limited to the frontend's origin, and contract errors decoded into clear EN/ES messages.</li>
+      </ul>
+    </details>
+    <details><summary>Frontend</summary>
+      <ul>
+        <li>Vanilla HTML/CSS/JS with ethers v6. Landing, grower form, florist form, public lookup and a QR page that saves the code as an image.</li>
+        <li>The lookup reads the contract through a public RPC: variety, origin, harvest and expiry dates, shelf life left, stock and receipt status. EN | ES interface.</li>
+      </ul>
+    </details>
+    <details><summary>Trade-offs and next steps</summary>
+      <ul>
+        <li>Signing is custodial to ease onboarding. Next: one wallet per grower with passkeys.</li>
+        <li>Authorizing growers and florists is a manual admin action. Next: an admin screen.</li>
+        <li>Testnet only. A mainnet deployment would start a new contract.</li>
+      </ul>
+    </details>
+  </div>
+  <div lang="es">
+    <p>Frontend estático (GitHub Pages) → backend serverless (Vercel) → contrato inteligente (Monad Testnet). Los clientes leen directo del contrato, sin backend y sin wallet.</p>
+    <details><summary>Contrato inteligente</summary>
+      <ul>
+        <li>Solidity ^0.8.24, un contrato (<code>FlorProof</code>) en Monad Testnet: <code data-contract>ver enlaces abajo</code>.</li>
+        <li>Un administrador autoriza productoras y florerías; cada rol solo llama a sus propias funciones.</li>
+        <li><code>declararLote</code>: una productora registra un lote. El ID del lote es el hash de su código, así que los códigos son únicos. Se guarda un hash de los datos junto con la dirección de la productora.</li>
+        <li><code>confirmarRecepcion</code>: una florería confirma la recepción. <code>registrarRamo</code>: vincula un ramo a un lote, solo para la florería que lo confirmó.</li>
+        <li><code>registrarVenta</code>: la productora descuenta stock, sin bajar de cero (todavía no está en la interfaz).</li>
+        <li><code>consultarLote</code> / <code>consultarRamo</code>: solo lectura. Los datos declarados no se pueden editar después. No se guardan el precio ni el nombre de la productora.</li>
+      </ul>
+    </details>
+    <details><summary>Backend</summary>
+      <ul>
+        <li>Node.js y ethers v6. Dos funciones: <code>registrar</code> (productora) y <code>florista</code> (florería).</li>
+        <li>Cada código de acceso corresponde a su propia clave de firma, guardada solo en variables de entorno. El backend firma y paga el gas, así que los usuarios nunca tocan una wallet.</li>
+        <li>Validación de entradas, comparación de códigos resistente a ataques de tiempo, CORS limitado al origen del frontend y errores del contrato traducidos a mensajes claros en EN/ES.</li>
+      </ul>
+    </details>
+    <details><summary>Frontend</summary>
+      <ul>
+        <li>HTML/CSS/JS puro con ethers v6. Inicio, formulario de productora, formulario de florería, consulta pública y una página de QR que guarda el código como imagen.</li>
+        <li>La consulta lee el contrato por un RPC público: variedad, origen, fechas de cosecha y vencimiento, vida útil restante, stock y estado de recepción. Interfaz EN | ES.</li>
+      </ul>
+    </details>
+    <details><summary>Compromisos y próximos pasos</summary>
+      <ul>
+        <li>La firma es custodiada para facilitar el alta. Próximo paso: una wallet por productora con passkeys.</li>
+        <li>Autorizar productoras y florerías es una acción manual del administrador. Próximo paso: una pantalla de administración.</li>
+        <li>Solo testnet. Un despliegue en la red principal empezaría con un contrato nuevo.</li>
+      </ul>
+    </details>
+  </div>
+</section>
+
+<section id="links">
+  <h2 lang="en">Links</h2><h2 lang="es">Enlaces</h2>
+  <ul>
+    <li data-need="repoFrontend"><a data-link="repoFrontend"><span lang="en">Code: frontend</span><span lang="es">Código: frontend</span></a></li>
+    <li data-need="repoBackend"><a data-link="repoBackend"><span lang="en">Code: backend</span><span lang="es">Código: backend</span></a></li>
+    <li data-need="contrato"><a data-link="explorador"><span lang="en">Contract on the Monad Testnet explorer</span><span lang="es">Contrato en el explorador de Monad Testnet</span></a></li>
+    <li data-need="video"><a data-link="video"><span lang="en">Demo video</span><span lang="es">Video de la demo</span></a></li>
+  </ul>
+</section>
+
+<footer><span lang="en">Flor Proof · Built for Metropolis · Test version</span><span lang="es">Flor Proof · Hecho para Metropolis · Versión de prueba</span></footer>
+</main>
+
+<script>
+// ===== COMPLETÁ ESTOS DATOS (lo que quede vacío se oculta solo) =====
+const CFG = {
+  contrato: "",          // dirección completa del contrato, empieza con 0x
+  codigoProductora: "",  // código de acceso de demo para la productora
+  codigoFloreria: "",    // código de acceso de demo para la florería
+  video: "",             // enlace al video de la demo
+  repoFrontend: "",      // enlace al repositorio del sitio
+  repoBackend: ""        // enlace al repositorio del backend
+};
+// ====================================================================
+const EXPLORADOR = "https://testnet.monadvision.com/address/";
+CFG.explorador = CFG.contrato ? EXPLORADOR + CFG.contrato : "";
+
+document.querySelectorAll("[data-text]").forEach(n => { const v = CFG[n.dataset.text]; if (v) n.textContent = v; else n.closest("li").hidden = true; });
+document.querySelectorAll("[data-contract]").forEach(n => { if (CFG.contrato) n.textContent = CFG.contrato; });
+document.querySelectorAll("[data-link]").forEach(a => { const v = CFG[a.dataset.link]; if (v) { a.href = v; a.hidden = false; a.target = "_blank"; a.rel = "noopener"; } else { const li = a.closest("li"); if (li) li.hidden = true; } });
+document.getElementById("codes").hidden = !(CFG.codigoProductora || CFG.codigoFloreria);
+
+let L = "en";
+try { L = localStorage.getItem("fp-lang") || ((navigator.language || "").toLowerCase().startsWith("es") ? "es" : "en"); } catch (e) {}
+function applyLang() {
+  document.documentElement.lang = L;
+  document.title = L === "es" ? "Flor Proof · Para el jurado" : "Flor Proof · For the judges";
+  document.querySelectorAll(".lang button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.l === L)));
+}
+document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click", () => { L = b.dataset.l; try { localStorage.setItem("fp-lang", L); } catch (e) {} applyLang(); }));
+applyLang();
+</script>
+</body>
+</html>
