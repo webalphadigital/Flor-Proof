@@ -130,12 +130,10 @@ function exito(j) {
   caja.append(el("small", j.idLote));
   const q = el("a", T("Open the QR", "Abrir el QR"), "boton");
   q.href = "qr.html?lote=" + encodeURIComponent(j.idLote); q.target = "_blank"; q.rel = "noopener";
-  const tx = el("a", T("View the transaction in the explorer", "Ver la transacción en el explorador"));
-  tx.href = EXPLORADOR + "/tx/" + j.hash; tx.target = "_blank"; tx.rel = "noopener";
-  const pie = el("p", undefined, "msg"); pie.append(tx);
+ 
   const otro = el("button", T("Register another batch", "Registrar otro lote"), "sec"); otro.type = "button";
   otro.addEventListener("click", () => { $("lote").value = ""; mensaje(T("Fill in the details and tap Register batch.", "Completá los datos y tocá Registrar lote.")); $("lote").focus(); });
-  out.replaceChildren(caja, q, pie, otro);
+  out.replaceChildren(caja, q, otro);
 }
 
 $("f").addEventListener("submit", async ev => {
