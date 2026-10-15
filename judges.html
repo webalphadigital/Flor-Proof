@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flor Proof · For the judges</title>
+<style>
+:root{--ink:#1f2a44;--muted:#5b6478;--paper:#f4f6f8;--card:#fff;--line:#d5dae3;--rose:#b4235a;
+--serif:"Iowan Old Style","Palatino Linotype",Georgia,serif;--sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+@media (prefers-color-scheme:dark){:root{--ink:#e8ecf6;--muted:#9aa4bc;--paper:#141a2b;--card:#1c2338;--line:#32405f;--rose:#ee6b9c}}
+*{box-sizing:border-box}
+html[lang="en"] [lang="es"],html[lang="es"] [lang="en"]{display:none}
+body{border-top:6px solid var(--rose);margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.6}
+main{max-width:42rem;margin:0 auto;padding:0 1rem 3rem}
+section{padding:1.8rem 0 .3rem}
+h1,h2,h3{font-family:var(--serif);line-height:1.2;margin:0}
+h1{font-size:clamp(2.2rem,9vw,3.2rem);margin-bottom:.6rem}h1 em{color:var(--rose);font-style:normal}
+h2{font-size:1.5rem;margin-bottom:.7rem}h3{font-size:1.05rem;margin:1rem 0 .3rem}
+p{margin:0 0 .8rem}ul,ol{margin:0 0 .8rem;padding-left:1.25rem}li{margin-bottom:.35rem}
+.hero{padding:2.2rem 0 1rem}.lead{font-size:1.15rem;color:var(--muted)}.badge{display:inline-block;margin:0 0 .8rem;padding:.2rem .75rem;border:1px solid var(--rose);color:var(--rose);border-radius:99px;font-size:.85rem;font-weight:700}
+.cta{display:inline-block;margin:.4rem .5rem 0 0;padding:.75rem 1.2rem;border-radius:.5rem;background:var(--ink);color:var(--paper);font-weight:700;text-decoration:none}
+.cta.sec{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:.8rem;padding:1.1rem;margin-bottom:.8rem}
+code{font-family:ui-monospace,Consolas,monospace;font-size:.92em;background:var(--paper);border:1px solid var(--line);border-radius:.3rem;padding:.05rem .35rem;overflow-wrap:anywhere}
+details{background:var(--card);border:1px solid var(--line);border-radius:.8rem;padding:.2rem 1rem;margin-bottom:.6rem}
+summary{cursor:pointer;font-weight:700;padding:.7rem 0}
+a{color:var(--rose)}
+a:focus-visible,summary:focus-visible,.lang button:focus-visible{outline:3px solid var(--rose);outline-offset:3px}
+footer{margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+[hidden]{display:none!important}
+.lang{display:flex;justify-content:flex-end;gap:.4rem;padding-top:1rem}.lang button{padding:.25rem .65rem;border:1px solid var(--line);border-radius:.4rem;background:transparent;color:var(--muted);font:inherit;font-size:.85rem;font-weight:700}.lang button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.top{display:flex;justify-content:space-between;align-items:center;padding-top:1rem}.top .lang{padding-top:0}.logo{display:block;line-height:0}.logo img{width:64px;height:64px;border-radius:.7rem;display:block}
+</style>
+<link rel="icon" type="image/webp" href="data:image/webp;base64,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">
+</head>
+<body>
+<main>
+<div class="top"><a class="logo" href="index.html"><img src="data:image/webp;base64,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" alt="Flor Proof" width="64" height="64"></a><div class="lang" role="group" aria-label="Language"><button type="button" data-l="en" aria-pressed="true">EN</button><button type="button" data-l="es" aria-pressed="false">ES</button></div></div>
+
+<header class="hero">
+  <p class="badge"><span lang="en">Metropolis review</span><span lang="es">Revisión de Metropolis</span></p>
+  <h1 lang="en">Judges' <em>guide</em></h1><h1 lang="es">Guía para el <em>jurado</em></h1>
+  <p class="lead" lang="en">Test Flor Proof in 3 minutes, see how it is built and find the code. The story behind the project is on the home page.</p>
+  <p class="lead" lang="es">Probá Flor Proof en 3 minutos, mirá cómo está construido y encontrá el código. La historia del proyecto está en la página de inicio.</p>
+  <a class="cta" href="#try"><span lang="en">Start testing</span><span lang="es">Empezar a probar</span></a>
+  <a class="cta sec" href="index.html"><span lang="en">Home page</span><span lang="es">Página de inicio</span></a>
+  <a class="cta sec" data-link="video" hidden><span lang="en">Watch the video</span><span lang="es">Ver el video</span></a>
+</header>
+
+<section id="overview">
+  <div lang="en">
+    <h2>What you are judging</h2>
+    <ul>
+      <li>A grower registers a batch and gets a QR code.</li>
+      <li>A florist confirms receipt and makes bouquets, each with its own QR.</li>
+      <li>A customer scans the QR, with no app and no wallet, and sees the journey.</li>
+    </ul>
+    <p><a href="index.html">Read the full story →</a></p>
+  </div>
+  <div lang="es">
+    <h2>Qué estás evaluando</h2>
+    <ul>
+      <li>Una productora registra un lote y recibe un QR.</li>
+      <li>Una florería confirma la recepción y arma ramos, cada uno con su QR.</li>
+      <li>Un cliente escanea el QR, sin app ni wallet, y ve el recorrido.</li>
+    </ul>
+    <p><a href="index.html">Leer la historia completa →</a></p>
+  </div>
+</section>
+
+<section id="try">
+  <div lang="en">
+    <h2>Try it in 3 minutes</h2>
+    <p>Quick look, no code needed:</p>
+    <ul>
+      <li><a href="consulta.html?lote=LOTE-030">Full journey of a batch</a> (grower → florist → bouquet)</li>
+      <li><a href="consulta.html?ramo=RAMO-030">A bouquet</a></li>
+    </ul>
+  </div>
+  <div lang="es">
+    <h2>Probalo en 3 minutos</h2>
+    <p>Vista rápida, sin código:</p>
+    <ul>
+      <li><a href="consulta.html?lote=LOTE-030">Recorrido completo de un lote</a> (productora → florería → ramo)</li>
+      <li><a href="consulta.html?ramo=RAMO-030">Un ramo</a></li>
+    </ul>
+  </div>
+
+  <div class="card" id="codes" hidden>
+    <h3 lang="en">Access codes (testnet only)</h3><h3 lang="es">Códigos de acceso (solo testnet)</h3>
+    <ul>
+      <li data-need="codigoProductora"><span lang="en">Grower:</span><span lang="es">Productora:</span> <code data-text="codigoProductora"></code></li>
+      <li data-need="codigoFloreria"><span lang="en">Florist:</span><span lang="es">Florería:</span> <code data-text="codigoFloreria"></code></li>
+    </ul>
+  </div>
+
+  <div lang="en">
+    <h3>Full flow</h3>
+    <ol>
+      <li><strong>Grower:</strong> open <a href="productora.html">"I'm a grower"</a>, enter the grower code and register a batch with a new code, for example <code>LOTE-031</code> or higher (LOTE-030 is the ready-made example). You get a QR page.</li>
+      <li>Open the QR: the status says "Pending confirmation".</li>
+      <li><strong>Florist:</strong> open <a href="florista.html">"I'm a florist"</a>, enter the florist code, choose "Confirm receipt of a batch" and use the same batch code.</li>
+      <li>Choose "Make a bouquet" with that batch code and a new bouquet code, for example <code>RAMO-031</code>. Open the bouquet QR.</li>
+      <li>Scan or open it: you see the full journey from grower to bouquet.</li>
+    </ol>
+    <p>Batch and bouquet codes can be used only once (letters, numbers, dots, hyphens and underscores). A bouquet needs a confirmed batch. If a code was already used, try the next number. Transactions take a few seconds.</p>
+  </div>
+  <div lang="es">
+    <h3>Flujo completo</h3>
+    <ol>
+      <li><strong>Productora:</strong> abrí <a href="productora.html">"Soy productora"</a>, escribí el código de productora y registrá un lote con un código nuevo, por ejemplo <code>LOTE-031</code> o más (LOTE-030 es el ejemplo ya armado). Recibís una página con el QR.</li>
+      <li>Abrí el QR: el estado dice "Pendiente de confirmación".</li>
+      <li><strong>Florería:</strong> abrí <a href="florista.html">"Soy florería"</a>, escribí el código de florería, elegí "Confirmar recepción de un lote" y usá el mismo código de lote.</li>
+      <li>Elegí "Armar un ramo" con ese código de lote y un código de ramo nuevo, por ejemplo <code>RAMO-031</code>. Abrí el QR del ramo.</li>
+      <li>Escaneá o abrí ese QR: ves el recorrido completo, desde la productora hasta el ramo.</li>
+    </ol>
+    <p>Los códigos de lote y de ramo se usan una sola vez (letras, números, punto, guion y guion bajo). Un ramo necesita un lote confirmado. Si un código ya se usó, probá con el siguiente número. Las transacciones tardan unos segundos.</p>
+  </div>
+</section>
+
+<section id="tech">
+  <h2 lang="en">Technical overview</h2><h2 lang="es">Descripción técnica</h2>
+  <div lang="en">
+    <p>Static frontend (GitHub Pages) → serverless backend (Vercel) → smart contract (Monad Testnet). Customers read directly from the contract, with no backend and no wallet.</p>
+    <details><summary>Smart contract</summary>
+      <ul>
+        <li>Solidity ^0.8.24, one contract (<code>FlorProof</code>) on Monad Testnet.</li>
+        <li>An admin authorizes growers and florists; each role can only call its own functions.</li>
+        <li><code>declararLote</code>: a grower records a batch. The batch ID is the hash of its code, so codes are unique. A hash of the data plus the grower's address is stored.</li>
+        <li><code>confirmarRecepcion</code>: a florist confirms receipt. <code>registrarRamo</code>: links a bouquet to a batch, only for the florist who confirmed it.</li>
+        <li><code>registrarVenta</code>: the grower decrements stock, never below zero (not in the interface yet).</li>
+        <li><code>consultarLote</code> / <code>consultarRamo</code>: read-only. Declared data can't be edited later. Price and grower name aren't stored.</li>
+      </ul>
+    </details>
+    <details><summary>Backend</summary>
+      <ul>
+        <li>Node.js and ethers v6. Two functions: <code>registrar</code> (grower) and <code>florista</code> (florist).</li>
+        <li>Each access code maps to its own signing key, kept only in environment variables. The backend signs and pays gas, so users never touch a wallet.</li>
+        <li>Input validation, timing-safe code comparison, CORS limited to the frontend's origin, and contract errors decoded into clear EN/ES messages.</li>
+      </ul>
+    </details>
+    <details><summary>Frontend</summary>
+      <ul>
+        <li>Vanilla HTML/CSS/JS with ethers v6. Landing, grower form, florist form, public lookup and a QR page that saves the code as an image.</li>
+        <li>The lookup reads the contract through a public RPC: variety, origin, harvest and expiry dates, shelf life left, stock and receipt status. EN | ES interface.</li>
+      </ul>
+    </details>
+    <details><summary>Trade-offs and next steps</summary>
+      <ul>
+        <li>Signing is custodial to ease onboarding. Next: one wallet per grower with passkeys.</li>
+        <li>Authorizing growers and florists is a manual admin action. Next: an admin screen.</li>
+        <li>Testnet only. A mainnet deployment would start a new contract.</li>
+      </ul>
+    </details>
+  </div>
+  <div lang="es">
+    <p>Frontend estático (GitHub Pages) → backend serverless (Vercel) → contrato inteligente (Monad Testnet). Los clientes leen directo del contrato, sin backend y sin wallet.</p>
+    <details><summary>Contrato inteligente</summary>
+      <ul>
+        <li>Solidity ^0.8.24, un contrato (<code>FlorProof</code>) en Monad Testnet.</li>
+        <li>Un administrador autoriza productoras y florerías; cada rol solo llama a sus propias funciones.</li>
+        <li><code>declararLote</code>: una productora registra un lote. El ID del lote es el hash de su código, así que los códigos son únicos. Se guarda un hash de los datos junto con la dirección de la productora.</li>
+        <li><code>confirmarRecepcion</code>: una florería confirma la recepción. <code>registrarRamo</code>: vincula un ramo a un lote, solo para la florería que lo confirmó.</li>
+        <li><code>registrarVenta</code>: la productora descuenta stock, sin bajar de cero (todavía no está en la interfaz).</li>
+        <li><code>consultarLote</code> / <code>consultarRamo</code>: solo lectura. Los datos declarados no se pueden editar después. No se guardan el precio ni el nombre de la productora.</li>
+      </ul>
+    </details>
+    <details><summary>Backend</summary>
+      <ul>
+        <li>Node.js y ethers v6. Dos funciones: <code>registrar</code> (productora) y <code>florista</code> (florería).</li>
+        <li>Cada código de acceso corresponde a su propia clave de firma, guardada solo en variables de entorno. El backend firma y paga el gas, así que los usuarios nunca tocan una wallet.</li>
+        <li>Validación de entradas, comparación de códigos resistente a ataques de tiempo, CORS limitado al origen del frontend y errores del contrato traducidos a mensajes claros en EN/ES.</li>
+      </ul>
+    </details>
+    <details><summary>Frontend</summary>
+      <ul>
+        <li>HTML/CSS/JS puro con ethers v6. Inicio, formulario de productora, formulario de florería, consulta pública y una página de QR que guarda el código como imagen.</li>
+        <li>La consulta lee el contrato por un RPC público: variedad, origen, fechas de cosecha y vencimiento, vida útil restante, stock y estado de recepción. Interfaz EN | ES.</li>
+      </ul>
+    </details>
+    <details><summary>Compromisos y próximos pasos</summary>
+      <ul>
+        <li>La firma es custodiada para facilitar el alta. Próximo paso: una wallet por productora con passkeys.</li>
+        <li>Autorizar productoras y florerías es una acción manual del administrador. Próximo paso: una pantalla de administración.</li>
+        <li>Solo testnet. Un despliegue en la red principal empezaría con un contrato nuevo.</li>
+      </ul>
+    </details>
+  </div>
+</section>
+
+<section id="links">
+  <h2 lang="en">Links</h2><h2 lang="es">Enlaces</h2>
+  <ul>
+    <li data-need="repoFrontend"><a data-link="repoFrontend"><span lang="en">Code: frontend</span><span lang="es">Código: frontend</span></a></li>
+    <li data-need="repoBackend"><a data-link="repoBackend"><span lang="en">Code: backend</span><span lang="es">Código: backend</span></a></li>
+    <li data-need="contrato"><a data-link="explorador"><span lang="en">Contract on the Monad Testnet explorer</span><span lang="es">Contrato en el explorador de Monad Testnet</span></a></li>
+    <li data-need="video"><a data-link="video"><span lang="en">Demo video</span><span lang="es">Video de la demo</span></a></li>
+  </ul>
+</section>
+
+<footer><span lang="en">Flor Proof · Built for Metropolis · Test version</span><span lang="es">Flor Proof · Hecho para Metropolis · Versión de prueba</span></footer>
+</main>
+
+<script>
+// ===== COMPLETÁ ESTOS DATOS (lo que quede vacío se oculta solo) =====
+const CFG = {
+  contrato: "",          // dirección completa del contrato, empieza con 0x
+  codigoProductora: "FLOR2026",  // código de acceso de demo para la productora
+  codigoFloreria: "FLORISTA2026",    // código de acceso de demo para la florería
+  video: "",             // enlace al video de la demo
+  repoFrontend: "https://github.com/webalphadigital/webalphadigital.github.io/tree/main/Flor-Proof",      // enlace al repositorio del sitio
+  repoBackend: "https://github.com/webalphadigital/flor-proof-backend"        // enlace al repositorio del backend
+};
+// ====================================================================
+const EXPLORADOR = "https://testnet.monadvision.com/address/";
+CFG.explorador = CFG.contrato ? EXPLORADOR + CFG.contrato : "";
+
+document.querySelectorAll("[data-text]").forEach(n => { const v = CFG[n.dataset.text]; if (v) n.textContent = v; else n.closest("li").hidden = true; });
+document.querySelectorAll("[data-contract]").forEach(n => { if (CFG.contrato) n.textContent = CFG.contrato; });
+document.querySelectorAll("[data-link]").forEach(a => { const v = CFG[a.dataset.link]; if (v) { a.href = v; a.hidden = false; a.target = "_blank"; a.rel = "noopener"; } else { const li = a.closest("li"); if (li) li.hidden = true; } });
+document.getElementById("codes").hidden = !(CFG.codigoProductora || CFG.codigoFloreria);
+
+let L = "en";
+try { L = localStorage.getItem("fp-lang") || ((navigator.language || "").toLowerCase().startsWith("es") ? "es" : "en"); } catch (e) {}
+function applyLang() {
+  document.documentElement.lang = L;
+  document.title = L === "es" ? "Flor Proof · Para el jurado" : "Flor Proof · For the judges";
+  document.querySelectorAll(".lang button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.l === L)));
+}
+document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click", () => { L = b.dataset.l; try { localStorage.setItem("fp-lang", L); } catch (e) {} applyLang(); }));
+applyLang();
+</script>
+</body>
+</html>
