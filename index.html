@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flor Proof · Every bouquet with its story</title>
+<meta name="description" content="Flor Proof: growers register their harvest, customers scan a QR code and learn where their flowers come from.">
+<style>
+:root{--ink:#1f2a44;--muted:#5b6478;--paper:#f4f6f8;--card:#fff;--line:#d5dae3;--rose:#b4235a;--green:#1e7f5c;
+--serif:"Iowan Old Style","Palatino Linotype",Georgia,serif;--sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+@media (prefers-color-scheme:dark){:root{--ink:#e8ecf6;--muted:#9aa4bc;--paper:#141a2b;--card:#1c2338;--line:#32405f;--rose:#ee6b9c;--green:#4cc79a}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.6}
+main{max-width:40rem;margin:0 auto;padding:0 1rem 3rem}
+section{padding:2rem 0 .5rem}
+h1,h2,h3{font-family:var(--serif);line-height:1.2;margin:0}
+h1{font-size:clamp(2rem,8vw,2.9rem);margin-bottom:.8rem}
+h1 span{color:var(--rose)}
+h2{font-size:1.6rem;margin-bottom:.8rem}
+h3{font-size:1.1rem;margin-bottom:.3rem}
+p{margin:0 0 .8rem}
+.lead{font-size:1.15rem;color:var(--muted);max-width:34rem}
+.hero{padding:3rem 0 1.5rem}
+.cta{display:inline-block;margin-top:.6rem;padding:.8rem 1.3rem;border-radius:.5rem;background:var(--ink);color:var(--paper);font-weight:700;text-decoration:none}
+.card{background:var(--card);border:1px solid var(--line);border-radius:.8rem;padding:1.1rem;margin-bottom:.8rem}
+.card p:last-child{margin-bottom:0}
+.problema li{margin-bottom:.6rem}
+ul{padding-left:1.2rem;margin:0}
+.pasos{list-style:none;padding:0;margin:0;counter-reset:p}
+.pasos li{counter-increment:p;display:flex;gap:.9rem;margin-bottom:.8rem}
+.pasos li::before{content:counter(p);flex:none;width:2rem;height:2rem;border-radius:50%;background:var(--rose);color:#fff;font-weight:700;display:grid;place-items:center}
+.pasos strong{display:block}
+.pasos span{color:var(--muted)}
+.accesos a.card{display:block;color:inherit;text-decoration:none}
+.accesos a.card:hover{border-color:var(--rose)}
+.accesos span{color:var(--rose);font-weight:700}
+a:focus-visible,.cta:focus-visible{outline:3px solid var(--rose);outline-offset:3px}
+footer{margin-top:2rem;padding-top:1rem;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+.lang{display:flex;justify-content:flex-end;gap:.4rem;padding-top:1rem}.lang button{width:auto;margin:0;padding:.25rem .65rem;border:1px solid var(--line);border-radius:.4rem;background:transparent;color:var(--muted);font:inherit;font-size:.85rem;font-weight:700}.lang button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}.lang button:focus-visible{outline:3px solid var(--rose);outline-offset:2px}
+.top{display:flex;justify-content:space-between;align-items:center;padding-top:1rem}.top .lang{padding-top:0}.logo{display:block;line-height:0}.logo img{width:64px;height:64px;border-radius:.7rem;display:block}
+</style>
+<link rel="icon" type="image/webp" href="data:image/webp;base64,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">
+</head>
+<body>
+<main>
+<div class="top"><a class="logo" href="index.html"><img src="data:image/webp;base64,UklGRgQXAABXRUJQVlA4IPgWAACwWQCdASrAAMAAPjEWiUMiISEVOg3wIAMEsgBqCRo/XPyO79LU/V/xz/Kj5crL/SfwP+UPSxlx9j/iv8t/ff29/xH//+Sf+b9mP56/5/uBfqF/rP7p/cf127n/mS/o397/2H9o94r/a/sB7sf6//ifYC/mv9o9Jz2Jf2U9gD+b/5/1bf+B/3P9b8GX7U/+7/VfAx/P/7z/2/z/+QD0AOpX62fzPtw/wv5M+gf4z9G/jvyo/dboudY+Zn8u+2f4r8s/af/W+MPAO/Hv55/jvym/M7lvwC/oP87/yn5m/4L05f5j0X+xP+m/Lf6AP5j/Xv9V5W/hT+RewB/Lv6//rfvA+mf+j/7P+f/KL3E/nH+L/7X+S+Af+af0z/gf4P96/jK9kP7t+zZ+yyIv1KYHqf2iW3Rh+dUWITxdUETqsyXZ4BmSYsDtfROJjq9i8sNdIkeSfvQzzsIBpFolxuXrvcdoKNq2CzbtDtBUpdXJI4XQcdtrWdw7sCA+WbSG/h+87A80pJE+faObNmjYnusJGBD170Wo/Zl3Z5gWn0hI7rniIK7uLAvNBqOYXD9RZbZgojgoL5tHvHY8Y9M6O6TeCd3j6cx/rlPxk0c0n5Z40HimMhRmEQtLIQO7bU4zuCIxXl5FWejtSZNPNDeXDDtQtdCMN+mnX9mFjnRX+cH5fbUdnMnzThM2xeJtn5nCOLE8z76kW3PhTRR2TIUELhPFdxo0Gzrj91FXFO6NyLPtbOdcYWe2s9DkvXVDFGl4xfswfbikL2PqZ1tKK+zESNNL1Z7nxdVyTnkm3WJXcFYGmIaI2h5AXBYigkP6APsroOXk6zPPXD+5OwTqWFD1tRGugWjNG9Pagh0YFq1BPN93qvMwMbdJ2NfOGfRKbtVmYH2TWJKZo2Ddpev5cBN48hx7kuFyg0YaKFZrxuxR6vvssj4GO+J1JBon/4twO0dxgypLcL6v0w9yTMAA/v7YgmfgXO6ntJMmer+Tgncm4PIHkTx1p3eWtGS4TdhbizBJlmQIch7dvSCdFtvBbo4x4nLarsueuoJYBN8+FtHsXRCjQP45DG86l3x4L3jG0KpDYVCQIWUbo9L9x2NbouV+IkhqHohRtZbGFWCiQCGmVrBtX6Mr9czl4Mh1gdmxxXQD1XuFEt5S+Jy9JDfgcI7gREJ+1/Hsi05txidbFXX6w3hLax2C2ghQj8hSz5Z8b/X6ww4CnNka/jKUlMvoxm3cNl+N2RTGOtLi8Iexp/JdxdEV9yORa6pGihW+5hZsG7HNIRf12Kq9fYc5iRIesevqWx4kjeUqS47hNmZTEQg1KTpKJQ+hCWepVfr9NxFqnBYEOUcsXfXhyb21CKnAQvUYfmHyx+9Qf5BMTkCLhZulXvQLCgIeIBgLY5M7t+ub/mGp+MVOThhDSJy5UoYW5+igBgvhfVyCEIUAp4YdNzP3K0TV2DKlAees7HdpelStsQctFsNS+aep8Ac0PfkKQMtAoMbIYXNeGSRF+9enX7M1JAnSpkZFglyGTcMTXU0pZ8D4muXZOYsDQbGxJfFRVy6e8k8KxJ6OVcFEsO4jEg3JB+6PHslEoQ0eVdy6c269ZkAvqAitNXCmr+AhTONs4OhiuGsK88JW8tFTsi5E7fLkSkgDYsaVzP6A2hRKrVX6RoQoRnXT/kq7njUUXo2y56W7KtXeZOiR31LLvujtgG/Pv0f+2sqKjNgASnwHsF0sy69EhxLYsTJQKaQk1zHgqTGTEs9TcO2sSH3OYohDB3mldEX9Wmw3XxhqEWRLlmHjqa0dwiFOVR2LNP4k5x8+Z7DClOznHNXZUbdEfjjsR/12WJ/WukI/gT0q4/CF74ORPfS/WKKqVXFqrcFduw63EDC9TsaRMRJlMr0B1V6lhJREHBGqThcfx7w+sJM+E9pp09Zc5rTGmhnDKd7FZ36AQ8wtvqfkeHuS1iZTt7eXMrCWadw+n6DwYOlOD8lKSurb0pFamueXIKjgAjYWab5UofKMlE9y9LJ/mRtOLrsqLY98BBTvSQd+GsCCIwnHdkAspnTjP/+dHpjQi1aLBwzht1iYGOv0tXZCPE06r7rCWvlsTh2yi1aEnnJ3AgABoIPAoi1X23lPhSZymqQiti2YA9z5hS7Q7TsgQHJwzYu8hGohFzs6YUyjAlhiPVPYn8ly+DvLGCL360SP3n9YLh+G6kv0D5dy5nkyt/2BVok/rjH//cQTGmhhXLypcmleRM4otxwJurszdJI1nU80zOYjlYFGKnMrIZtcOxGCjHnE4qGFj8t3pL+S0VzkgQXOVerLyADQaalJYL5qGoY6MdpoUmWH9kEwhDlbzGOdqXe6JxrM9CTsniLfeWs4EB5uAEbWt3WwlJ7n3pZqnL9u08WlO05e8J+ma4r+m3HDNwBCWStDJ6Km8wMCTKHsuN4aE85IxRHpQfNYY8gdRH4Of0ag7NRLNBd82riklviXsQ22NtZSUKT/bxlTCaF9960gON0NP6pcm3jwGpbb5/ASdN0AyzduJCFUpxZnpsNqJiFc4giFbCQXWpgE0FPE9MEYyybhCUtpqntz38JIT0pVycC7LJTVyN5naqhL63X+kuL5WYraLy68CXcodrfWX3iWumixbEjoe+Zl3T5owPjRf6jndqBhQjxQZhcy5pjfsdoyeKmWncgS6g5cZt1u2ZiOJMyLV/Hmj3DXUtxA2xQxQYMckdV9OQeXWXEUFzdv4QrGVekLNZLdJnzj6P3wPEGEL314OzjpmNHX+TOSqrDy0qp5PSMa5NN1LsQFPC0X/WBQxHiHvgW+4xcPjQ5+bVBuA5pP0ayoGOwyc0eWje4iyhXFhbgI3e2hqaQgzOUy6MQ2ikArl43fKoeECAuCtj7vMAnMNd9PH+ck6rRkVWS68p54qs8iCbXRjNol3Uoc3jC4xyJ6FjCwfGSpPIgLcmEOLS5fQqd+N0MkAxRREUdyEoz9NVBHesnhKzdDYku0qWBdknaFw+DvbXwdtMuMpooBwYbVfIRBXVmsr4ZFMMo5FJyi2LvrM4fjGay+zZdkhM7YjP8mxTA+gh23fleIXid8QUNQkjraSWdVKfWvEgkhoUcgGoS9dS+is/V3PqgYA0EI+cntQ21MPI6rC7Pmgpesyf1gw1kLSUh5ZydRJoGyosQuok/8riPsSQTCzlpkoD2dvTQWoAaDR6S+bD7AZKIoDfK2+wRW3ofajOCroxgzlzwjm7zh/wSJFOCevMu7AmYkv8FeXjAeHCJVnqjs5QKQIqxdYmQCL/pjuxNR6HcvgDxEOExPoMlHUCbNld1QMdJu96+scqXcnkxwtaOJMJ/WuuhX7AlL15YHz7GvRZUDpB9X0rzNn6CCAQJQCCKh/gD5X6wRQne8L+YiNZVN318jDFnjM3bE/tbbkRprAOBIupQ22HzvX3EBJ9bmUQazseOr9DDifa3I7ctfsDt7qUuoOr/RWmJbGPRpaXbzxvn0HG3SyxyfN/0mBLk/Rtdx+z9hd//bg+GQaL0w4yiycG2i3xIL53XpDGEOE26s6mkZHvTTOTIs12gXjTfc99tlaJLpdIuypBjv4If1CN9jiIARmDmki0vsqLgSYRtGmaG5Vb08Rdw7j4kIpwJeOBIh/uEAtmbE33wXhWN/GSSmrPvkZGH6CwfJNpFWf8XX83eYeeUP5nJpqLS3loCBbtLavELxrPGkX02XDDN14ZF/n8+OPcWRJUG74tzhvdsTTaoJlqV9Jlc9rUx3R3oWOlTqZk2bbUG3Wbkx4EK1q5WUebLu9LSIt/PKYrXxw/zXgR8WghPs20mEvh/n+jSumXXwiYZaH6wD4NvedjKiUdtM4rhmcLU+UIiy1z3dLfYDJJ2/nqbrHilLVlLCOC6tBrpj2wf+5ZHR3OU+nddVVzbx9+h/S9LIOyXkEsSx2M2B8c4bvzjbFZfraxVs7C/TmOf0FkygTSj+rkTmpOvxcr4/816R0ORp68nK59GJJiAmorAOfk39iusZoj+e4GRV6sKDLPTFH2HFveOhaKRncjNucMkgs1fmr0R5Sqwrd0M95WQi8+eMvVr9zpFJKzhMtzwJMe0tE9iEgbq+dAnCeL0f+TCfs2zYxojJuMXuta2jBcP0JhWAnFjNAaaDKdkgre3hC/q8h0+gY3k9I3ALl+IqmCNVcNL9uN7Q7TK8tZ8s7BXnbOVYDsNBDjDnRNFlD2KROMQvW3M5LcohhXpMF5CGoVLh9/g0EVFjwS2PxfwDcSFCfTELMmuTHlFrlJ1tK8TG/xeQTE0chq4BwKATshj4FtQ+dXs68JD1HdJv04xyYrt85fujWzbj+o3/hxZj18M6lw/qC/PkwqgUjNfv8LnnEQ8FHDiWntlP3sK/WjMJfwvLs9/UV8sSnRc+E/hM8LsnBo/QNTUCHpmzL9bdSNT/0yF5MW51bUu5rAEK5sRRp12SOkO2KoGE+dKt6jgFi/BfDudvpvIeXvqzMVuTIHZXU85nJlFr9VcBtddbdCOfvQo4jRygTeZNKw6qXEQP0uayLxEvPFmCI1+PQ38EdkFYjVCW3atmnTmiuOD6+z32kUoV/JocGwOQx0jlIq9synDTC+DAr/50SBpx3CTHrbLJcSdy/t4xz60E4M0KXg6aYM7oRdHvLSAcDtAekAQTWYq1P9YeQU0MNpEn2kfIiivAcLw8cBcHU6TbztpooemFAr3vfmJNBniMtMzf8zpt0sTJWmph/ZjNh29iqGdJHrgKgN+N+d/EWND7Rh5W49ftHvyGPcsbw0VI6zrtZVAf43U3IPpci2h7yxyBXwx+lH1l0XmjSgSjuvv0TvhjPn3sHv2uvtvax/HJWyaYMmOSKf2q5db9OG+mm9GPHqHKxuEorvgyLN6oGSn9Sa3tUd1TX84R5HyRwKWtr4ueZgmQFY5M9ZC92O/murfFsJTkXBbefEPjc0K91XkOtz038c1Tlvd/eUbf7N35eBd9cGN7oIz0vSIwymkupsH/0l8JnDnJY5/hj3fmfa1JMvcmPQFL/tzp80r+LufD02kFqenOVVLj0vEjUYXaQ+f1tNxcpWlwzDUX/GpJKbvq5BZwE8CsVqRZuJFjuqrR5DH1PHLfn3PiQA0lNumb495F7nVOOdjbPgZ9Qc0OE9qiaoMzH9fjJWpCKm5nBMazDO2BRUlUCoSPm7pZi4lSjZ8qnu5KisLYPsnNagm6IVhapcVfmF7g3aGtDdAhvykWNAL1s8xT2aafUNX5dubJ/cq3zWnuGVT+OVl+JnT1qQRV/Wgj89qcGrZqyOZAmBE5+/DLKgCqQd44HWOwpj+yCNzvggapjXlnF0+uyDqhKdhlux+LbduFrPh0IIlgcT8o0Y/jHZSRIafOfxt/GYNoo25N6Dk7kWEE3Vfwm5XnEHE3sWrlYHkBwRxscnYe4q+wpfNUq+BIErRzYSw/jG7ZA3u79ddbzGW/uq3k+aQvXElA8fkC8Xe9CmENHFMgM3KSdUvSTnjoKTXVqZSeRD0tWH/n/o/NrBF8z4siK4s1ajn/GpWy4OATwluIjExQxyh3zAPYBJCEeXJvdprxnVuF1XgrM6hWr1vGcFyq0ZlCwHvafX0Mqe+In6LuBYb//7f0wsLIMYjXhelsizNu60vXu00eu7bcmneER9IjONaXQDgzikxgWYC/JA/eHJT0klNGe0YssmDf3eLl1vICTLCi+/AZj63H1+pUFdeOZ1c+HP/A38PQO954xUxbf2YfQprikRHc9m6rTTru0QFKZWXjYH+YIP0hkjf5cpCmdQuZyfxCglzUbcQ5anQbhI5g1d2vFM7d7qRoj7lUDQvdffdNBDFzm8PaH1hxeGaUlR87S7Or0BEW7nq29HmXpEz3f/vON863Mskwpq6xWhRN2fpo9UVcfWCdSwSsBB3l2dipvJ3aHxjUO24uUQr24POGkSc0HZyNkNe3TfWay4ibFql7uRxBrpYUhaIon0kRVxzNCWAQ0IYBP/axY9FL0loZcWyEB42B34Plt5lAWixxmkNh/pUqyft5VhLcShBhWwnBYg1eprvaqtoI8C5aUaoNF5E6W1g0j/t2P1t6ls/X5SWU3wyOVeaUMb2EdeldQf/xOHpG3uv3UYuBv6iivCMliwVOwgfTOAo2oZauCZCMCGR08Qgn4pkkuJ1M24h0dGL0XRqfbqqz4yu4xg7CjMadMf7Fr0Q5/BEGAaViAkTidwRl/rHTP0Bn1bg6AzthVJNH1eqTWd9IcLBwyUzeISepiJhuPUJuFa8FaMHMbCU+oOFsH/R9erhbCIHQsQ3TIHeomjtDOCoMkbCE+qoNUwFD3ag5enJyDOaArLeggbfn+KnjJNs7+0S05Yz46TqILZu0YsXJenT8tepbDui39Suc6/hU6EWU+/42zOAF7HCeS4mGIGkdHy4DJxcH3HoSRsLh+n45wtAlQUoy/9i45dkPlNqcjWVTopHnmIDuLIzujoXgoZgJB/9nxnxWmPdFGvK+7v8ifV8sOLhpIgcE5gyauMNk0tX8FyQ2CWm9vafKdy1/1z4AnG05OtkXVlz09Tt0KPcbDCf8qH33ElSpTiDKWpsj1mm3ZX/xsINiiUL5SVhT+zOY9MsShFBs09m5RYJ3AjBKJ1qn4SjrhzSwy85+fLwpLcU0xDiSxSpqrWOJq6X8H2dcU5my/W/pAb+3NVBbgWg2KSP8ibRGWMVZDdwcRuPE7BnrLyZKoB74aRnqo5dJ0J/QYmeOaOJRi9K2flxxDwbctfLDSLHkNz/lAg9b1QbaeSLX2AkOgbnztTXXdnabWO2uyz4knMcSItRtFjcsHbF5d5hVp3zbsyYiqFsrv9qWFlRERdEC16YJqFdopjOrO5bEVVc7ys8XhunR6AFAR+1oLGXP5ArAX+HSoXxKzsGJtwRLc0Z/WUl0HSrFRUOz8FFiy3Kz1GsecvkjH2bAQcblb2DFT0vjgPLfFCgpPNeUUeBjhVffRgJROnnrQDFnmC2n8Xorh6T5+QyBIIOiO5x1xTfawJZZJgMr9mA82nnjQzd+x3AANChF8TFApvs8X6FTD/dPpk7EdNQBvN/n4Y8qWdPE00Kz0vXo8fkljS+OoV4RSIK1LBbBiivGDuMZFOgGiikeUK3VUPcs1+CsRfZnVCoUNPjrsXZKQajrgBpaMCBTxQ4UfdU4grtwZQIj/Ip+bjf/Qrb2ghup0TStjj3GPI2jLXuT9Y8/+CqoWXB61GjhOxZUQkRPZQHjlfEy0k+IXlminpmotVdty1R9V8OBwXjDgyFU8m9R2O0zhbEld4GpnYBmMk36FoQ2eFhrIbsoD1fo3ShAMbjf2Shx4nelW/H8KubzORk0cHMP4Kr51JNt9yXSZnpnz6P4BpHl1XMP2Uja/Doje/PlEclFGnQH9dHH47GaRrPw4TyXvcLcJVHTWuHSvHg1iw4jCmY/Y9x5Ur+Zj//FrOEmF8reNk9K281n/92Nmtnr9JYRGfwqmil7pyG0So27/Kn3Xdg+luMUURlhbuZvEkFDqQ0IkPwGZ//rwsy2+SPPPJzNHUr368JLDfA1Yc7D1SX7U23MUjr5sytsfJx0z4ZNlYinfMjb4qnPNGS7dPwqd6lX+mOKBZlOaI1Pu/nkL/PZriT4q5vTW6Hjc7Lf/Ykbb9QU75kVVAy/p2QWbn6qUcneezxZ8ySYsQ+CVJotRK6VJr8Kjfx5WOSdODjtOtw7z5GzhjdWrSleH6y1cA/yj7T08Qe+4DYL0vL7tNoMFIVknTkLoW/UJXr49lIlAF/xn5nuV6/IaDJ/g2n7AlKVS+fiGqrjnoErxre22HuV0AyjrEdbdJ34YkHjjj8cXHBbC/jTyU5r3uujHilGoNWplwzY8nYk4LjNh4UN16mGzgAAAAA=" alt="Flor Proof" width="64" height="64"></a><div class="lang" role="group" aria-label="Language"><button type="button" data-l="en" aria-pressed="true">EN</button><button type="button" data-l="es" aria-pressed="false">ES</button></div></div>
+
+<header class="hero">
+  <h1>Every bouquet with <span>its story</span></h1>
+  <p class="lead">Flor Proof is a platform where growers register their harvest and get a QR code. Customers scan it and know where their flowers come from.</p>
+  <a class="cta" href="#accesos">Go to the forms</a>
+</header>
+
+<section id="problema">
+  <h2>The problem</h2>
+  <div class="card problema">
+    <ul>
+      <li>Small and medium flower growers keep track of their harvests without a reliable method.</li>
+      <li>Whoever buys the bouquet doesn't know who grew it or where it came from.</li>
+      <li>Without a brand, growers can't build a reputation or keep customers coming back.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="solucion">
+  <h2>The solution</h2>
+  <p>Growers register each batch and get a QR code. It goes on the bouquet, and the customer scans it with their phone.</p>
+  <ol class="pasos">
+    <li><div><strong>The grower declares a batch</strong><span>Variety, zone, season, quantity, harvest date and shelf life.</span></div></li>
+    <li><div><strong>The florist confirms receipt</strong><span>Records that the batch arrived and makes the bouquets.</span></div></li>
+    <li><div><strong>The customer scans the QR</strong><span>Sees who grew it, where it comes from, which variety it is and how long it lasts.</span></div></li>
+  </ol>
+</section>
+
+<section id="beneficios">
+  <h2>Benefits</h2>
+  <div class="card">
+    <h3>For the grower</h3>
+    <p>Keep an organized record of every harvest, build your own brand and earn the reputation that brings customers back.</p>
+  </div>
+  <div class="card">
+    <h3>For the florist</h3>
+    <p>Know where what you sell comes from and show it on every bouquet.</p>
+  </div>
+  <div class="card">
+    <h3>For the customer</h3>
+    <p>Know which flowers you are buying: where they were grown, who grew them, which variety they are and how long they last.</p>
+  </div>
+</section>
+
+<section id="accesos" class="accesos">
+  <h2>Try it</h2>
+  <a class="card" href="productora.html">
+    <h3>I'm a grower</h3>
+    <p>Register a batch and get its QR code.</p>
+    <span>Open the form →</span>
+  </a>
+  <a class="card" href="florista.html">
+    <h3>I'm a florist</h3>
+    <p>Confirm receipt of a batch and make a bouquet with its QR code.</p>
+    <span>Open the form →</span>
+  </a>
+  <a class="card" href="consulta.html">
+    <h3>I'm a customer</h3>
+    <p>Look up the origin of a batch or bouquet with its code.</p>
+    <span>Look up →</span>
+  </a>
+</section>
+
+<footer>Flor Proof · Test version</footer>
+</main>
+<script>
+let L = "en";
+try { L = localStorage.getItem("fp-lang") || ((navigator.language || "").toLowerCase().startsWith("es") ? "es" : "en"); } catch (e) {}
+const T = (en, es) => (L === "es" ? es : en);
+const ES = {"Every bouquet with <span>its story</span>": "Cada ramo con <span>su historia</span>", "Flor Proof is a platform where growers register their harvest and get a QR code. Customers scan it and know where their flowers come from.": "Flor Proof es una plataforma donde la productora registra su cosecha y genera un QR. El cliente lo escanea y sabe de dónde vienen sus flores.", "Go to the forms": "Ir a los formularios", "The problem": "El problema", "Small and medium flower growers keep track of their harvests without a reliable method.": "Los pequeños y medianos productores de flores llevan el registro de sus cosechas sin un método confiable.", "Whoever buys the bouquet doesn't know who grew it or where it came from.": "Quien compra el ramo no sabe quién lo produjo ni de dónde viene.", "Without a brand, growers can't build a reputation or keep customers coming back.": "Sin una marca, la productora no puede construir reputación ni fidelizar a sus clientes.", "The solution": "La solución", "Growers register each batch and get a QR code. It goes on the bouquet, and the customer scans it with their phone.": "La productora registra cada lote y recibe un QR. Se pega en el ramo, y el cliente lo escanea con su celular.", "The grower declares a batch": "La productora declara su lote", "Variety, zone, season, quantity, harvest date and shelf life.": "Variedad, zona, temporada, cantidad, fecha de cosecha y vida útil.", "The florist confirms receipt": "La florería confirma la recepción", "Records that the batch arrived and makes the bouquets.": "Deja constancia de que el lote llegó y arma sus ramos.", "The customer scans the QR": "El cliente escanea el QR", "Sees who grew it, where it comes from, which variety it is and how long it lasts.": "Ve quién lo produjo, de dónde viene, qué variedad es y cuánto le dura.", "Benefits": "Beneficios", "For the grower": "Para la productora", "Keep an organized record of every harvest, build your own brand and earn the reputation that brings customers back.": "Lleva un registro ordenado de sus cosechas, construye su propia marca y gana reputación para fidelizar más clientes.", "For the florist": "Para la florería", "Know where what you sell comes from and show it on every bouquet.": "Sabe de dónde viene lo que vende y puede mostrarlo en cada ramo.", "For the customer": "Para el cliente", "Know which flowers you are buying: where they were grown, who grew them, which variety they are and how long they last.": "Sabe qué flor está comprando: dónde se produjo, quién la produjo, qué variedad es y cuánto dura.", "Try it": "Probalo", "I'm a grower": "Soy productora", "Register a batch and get its QR code.": "Registrá un lote y obtené su QR.", "I'm a florist": "Soy florería", "Confirm receipt of a batch and make a bouquet with its QR code.": "Confirmá la recepción de un lote y armá un ramo con su QR.", "I'm a customer": "Soy cliente", "Look up the origin of a batch or bouquet with its code.": "Consultá el origen de un lote o de un ramo con su código.", "Open the form →": "Abrir el formulario →", "Look up →": "Consultar →", "Flor Proof · Test version": "Flor Proof · Versión de prueba"};
+function applyLang() {
+  document.documentElement.lang = L;
+  document.querySelectorAll("body *").forEach(n => {
+    if (n.tagName === "SCRIPT" || n.closest(".lang")) return;
+    const h1 = n.tagName === "H1";
+    if (n.children.length && !h1) return;
+    if (!n.dataset.en) { const k = h1 ? n.innerHTML : n.textContent.trim(); if (!(k in ES)) return; n.dataset.en = k; }
+    const v = L === "es" ? ES[n.dataset.en] : n.dataset.en;
+    if (h1) n.innerHTML = v; else n.textContent = v;
+  });
+  document.querySelectorAll(".lang button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.l === L)));
+  document.title = T("Flor Proof · Every bouquet with its story", "Flor Proof · Cada ramo con su historia");
+}
+document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click", () => { L = b.dataset.l; try { localStorage.setItem("fp-lang", L); } catch (e) {} applyLang(); }));
+applyLang();
+</script>
+</body>
+</html>
